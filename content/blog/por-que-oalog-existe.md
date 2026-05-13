@@ -26,7 +26,7 @@ La fragmentación tiene un costo emocional para quien la sufre, y un costo estra
   <div style="border:0.5px solid var(--ink-300);padding:16px 18px;"><div style="font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--ink-500);font-family:'JetBrains Mono',monospace;margin-bottom:6px;">Para mí</div><div style="font-size:14px;color:var(--ink-900);line-height:1.5;">Cada plataforma me pedía ser una versión distinta. Tono distinto. Audiencia distinta. <b>Mantener cinco "yos" cansa.</b></div></div>
   <div style="border:0.5px solid var(--ink-300);padding:16px 18px;"><div style="font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--ink-500);font-family:'JetBrains Mono',monospace;margin-bottom:6px;">Para quien busca</div><div style="font-size:14px;color:var(--ink-900);line-height:1.5;">Inversionista, posible socio, organizador de evento — nadie quería juntar piezas. Si no contesto en una pieza, lo pierdo.</div></div>
   <div style="border:0.5px solid var(--ink-300);padding:16px 18px;"><div style="font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--ink-500);font-family:'JetBrains Mono',monospace;margin-bottom:6px;">Para el algoritmo</div><div style="font-size:14px;color:var(--ink-900);line-height:1.5;">Cada plataforma me empujaba a su nicho. <b>Posts virales en una</b>, irrelevantes en otra. Sin compounding.</div></div>
-  <div style="border:0.5px solid var(--ink-300);padding:16px 18px;"><div style="font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--ink-500);font-family:'JetBrains Mono',monospace;margin-bottom:6px;">Para mi marca</div><div style="font-size:14px;color:var(--ink-900);line-height:1.5;">La through-line — "founder que construye con IA en MX, escribe, habla, y hace contenido" — <b>no existía en ningún lado</b>.</div></div>
+  <div style="border:0.5px solid var(--ink-300);padding:16px 18px;"><div style="font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--ink-500);font-family:'JetBrains Mono',monospace;margin-bottom:6px;">Para mi marca</div><div style="font-size:14px;color:var(--ink-900);line-height:1.5;">La through-line — "founder que construye en MX, escribe, habla, y hace contenido" — <b>no existía en ningún lado</b>.</div></div>
 </div>
 
 Y el costo más grande: **no podía construir compounding**. Cada plataforma era un cubo separado. Mis followers de Instagram no veían mis builds. Mis seguidores de GitHub no leían mis ensayos. Y yo no podía decir "ve mi log" porque no había un log.
@@ -35,7 +35,7 @@ Y el costo más grande: **no podía construir compounding**. Cada plataforma era
 
 La hipótesis: si todo lo que hago — código, escritos, charlas, contenido — vive en un solo lugar con un solo tag de tipo (`build`, `write`, `talk`, `make`), entonces la *persona* emerge sin que yo la cure. La emerge la suma.
 
-> No soy un developer que también escribe. No soy un creator que también construye. Soy el log de todo eso junto. La distinción entre roles es del observador, no mía.
+> No soy un product person que también escribe. No soy un creator que también construye. Soy el log de todo eso junto. La distinción entre roles es del observador, no mía.
 
 Es una decisión de identidad antes que de UX. Si mi sitio dice "aquí está mi código" y "aquí están mis escritos" en navegaciones separadas, estoy aceptando que esas son cosas diferentes. Y para mí no lo son. Son la misma persona haciendo cosas distintas el lunes y el jueves.
 
