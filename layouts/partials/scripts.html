@@ -1,0 +1,49 @@
+<script>
+(function() {
+  const mode = document.getElementById('oaMode');
+  if (mode) {
+    const stored = localStorage.getItem('oa-theme');
+    if (stored === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    mode.addEventListener('click', () => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (isDark) { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('oa-theme', 'light'); }
+      else { document.documentElement.setAttribute('data-theme', 'dark'); localStorage.setItem('oa-theme', 'dark'); }
+    });
+  }
+  const clock = document.getElementById('oaClock');
+  if (clock) {
+    function tick() {
+      const d = new Date();
+      const p = n => String(n).padStart(2, '0');
+      clock.textContent = `${p(d.getMonth()+1)}.${p(d.getDate())} · ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())} CDMX`;
+    }
+    tick();
+    setInterval(tick, 1000);
+  }
+  const langWrap = document.getElementById('langWrap');
+  if (langWrap) {
+    langWrap.addEventListener('click', () => {
+      const a = document.getElementById('langActive');
+      const b = document.getElementById('langOther');
+      const t = a.textContent; a.textContent = b.textContent; b.textContent = t;
+    });
+  }
+  const heart = document.getElementById('oaHeart');
+  if (heart) {
+    const heartCount = document.getElementById('heartCount');
+    let likes = parseInt(localStorage.getItem('oa-likes') || '42', 10);
+    let liked = localStorage.getItem('oa-liked') === '1';
+    heartCount.textContent = likes;
+    function toggle() {
+      liked = !liked; likes += liked ? 1 : -1;
+      heartCount.textContent = likes;
+      heart.style.transform = 'scale(1.5)';
+      setTimeout(() => heart.style.transform = 'scale(1)', 220);
+      localStorage.setItem('oa-likes', String(likes));
+      localStorage.setItem('oa-liked', liked ? '1' : '0');
+    }
+    heart.addEventListener('click', toggle);
+    heart.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+  }
+})();
+</script>

@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+{{- partial "head.html" . -}}
+<body>
+  <a href="#main" class="skip-link">Saltar al contenido</a>
+  {{- block "main" . }}{{- end }}
+  {{- partial "scripts.html" . -}}
+</body>
+</html>

@@ -1,0 +1,74 @@
+{{ define "main" }}
+<main class="container" id="main">
+  {{ partial "topnav.html" . }}
+
+  <section class="hero" style="padding: clamp(28px,5vw,56px) 0 clamp(20px,3vw,32px);">
+    <h1 style="font-family:'Inter',sans-serif;font-size:clamp(64px,15vw,200px);line-height:0.9;font-weight:500;letter-spacing:-0.045em;margin:0;color:var(--ink-900);">oa<span style="color:var(--accent);">.</span>log</h1>
+    <p style="margin-top:clamp(14px,2.4vw,24px);font-size:13px;color:var(--ink-500);">El log de Osvaldo · <b style="color:var(--ink-900);font-weight:500;">builds</b> · writes · talks · makes</p>
+  </section>
+
+  {{ /* Stage — featured upcoming talk */ }}
+  {{ $upcoming := first 1 (where (where site.RegularPages "Section" "stage") "Params.status" "upcoming") }}
+  {{ with index $upcoming 0 }}
+  <section id="stage" style="padding:24px 0;border-top:1px solid var(--ink-900);margin-top:24px;">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;padding:16px 0;flex-wrap:wrap;gap:8px;">
+      <h2 style="font-size:clamp(28px,4vw,44px);line-height:1;font-weight:500;letter-spacing:-0.022em;margin:0;color:var(--ink-900);">Stage</h2>
+      <span style="font-size:11px;color:var(--ink-500);letter-spacing:1px;font-family:'JetBrains Mono',monospace;">Próxima charla en vivo</span>
+    </div>
+    <a href="{{ .RelPermalink }}" style="display:block;padding:24px 18px;border-left:4px solid var(--accent);text-decoration:none;color:inherit;">
+      <div style="font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--accent);font-family:'JetBrains Mono',monospace;margin-bottom:12px;">Keynote · {{ .Params.duration | default "15 min" }} · {{ .Params.language | default "ES" }}</div>
+      <h3 style="font-size:clamp(28px,4.6vw,52px);line-height:1.04;font-weight:500;letter-spacing:-0.028em;margin:0 0 14px;color:var(--ink-900);max-width:22ch;">{{ .Title | safeHTML }}</h3>
+      <p style="font-size:clamp(14px,1.5vw,16px);line-height:1.45;color:var(--ink-500);margin:0 0 14px;max-width:60ch;">{{ .Description }}</p>
+      <div style="font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--ink-500);font-family:'JetBrains Mono',monospace;">
+        <b style="color:var(--ink-900);">{{ .Params.event }}</b> · {{ .Params.venue }} · {{ .Params.location }} · {{ dateFormat "2006.01.02" .PublishDate }}
+      </div>
+    </a>
+  </section>
+  {{ end }}
+
+  {{ /* Log table — all content sorted by date desc */ }}
+  <section id="log" style="padding:24px 0;border-top:1px solid var(--ink-900);margin-top:24px;">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;padding:16px 0;flex-wrap:wrap;gap:8px;">
+      <h2 style="font-size:clamp(28px,4vw,44px);line-height:1;font-weight:500;letter-spacing:-0.022em;margin:0;color:var(--ink-900);">Log</h2>
+      <span style="font-size:11px;color:var(--ink-500);letter-spacing:1px;font-family:'JetBrains Mono',monospace;">{{ printf "%02d" (len (where site.RegularPages "Section" "in" (slice "blog" "stage"))) }} entradas</span>
+    </div>
+
+    <table class="log-table" style="width:100%;border-collapse:collapse;font-size:14px;">
+      <thead>
+        <tr>
+          <th style="text-align:left;font-weight:400;color:var(--ink-300);padding:10px 8px;font-size:10px;letter-spacing:0.5px;text-transform:uppercase;border-bottom:1px solid var(--ink-300);font-family:'JetBrains Mono',monospace;">lp.</th>
+          <th style="text-align:left;font-weight:400;color:var(--ink-300);padding:10px 8px;font-size:10px;letter-spacing:0.5px;text-transform:uppercase;border-bottom:1px solid var(--ink-300);font-family:'JetBrains Mono',monospace;">nombre</th>
+          <th style="text-align:left;font-weight:400;color:var(--ink-300);padding:10px 8px;font-size:10px;letter-spacing:0.5px;text-transform:uppercase;border-bottom:1px solid var(--ink-300);font-family:'JetBrains Mono',monospace;">tipo</th>
+          <th style="text-align:left;font-weight:400;color:var(--ink-300);padding:10px 8px;font-size:10px;letter-spacing:0.5px;text-transform:uppercase;border-bottom:1px solid var(--ink-300);font-family:'JetBrains Mono',monospace;">categoría</th>
+          <th style="text-align:right;font-weight:400;color:var(--ink-300);padding:10px 16px 10px 8px;font-size:10px;letter-spacing:0.5px;text-transform:uppercase;border-bottom:1px solid var(--ink-300);font-family:'JetBrains Mono',monospace;">fecha</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{ $entries := where site.RegularPages "Section" "in" (slice "blog" "stage") }}
+        {{ range $i, $p := $entries.ByPublishDate.Reverse }}
+        <tr>
+          <td style="color:var(--ink-300);width:32px;font-variant-numeric:tabular-nums;font-family:'JetBrains Mono',monospace;font-size:12px;padding:16px 8px;border-bottom:1px solid var(--ink-300);">{{ printf "%02d" (add $i 1) }}</td>
+          <td style="padding:16px 8px;border-bottom:1px solid var(--ink-300);font-weight:500;"><a href="{{ .RelPermalink }}" style="color:inherit;text-decoration:none;">{{ .Title }}</a></td>
+          <td style="width:72px;padding:16px 8px;border-bottom:1px solid var(--ink-300);"><span style="font-size:10px;letter-spacing:0.5px;padding:3px 10px;border:1px solid var(--ink-300);border-radius:999px;color:var(--ink-500);font-family:'JetBrains Mono',monospace;">{{ .Params.kind }}</span></td>
+          <td style="color:var(--ink-500);width:180px;font-size:12px;padding:16px 8px;border-bottom:1px solid var(--ink-300);">{{ .Params.category }}</td>
+          <td style="color:var(--ink-500);width:96px;font-size:12px;font-variant-numeric:tabular-nums;font-family:'JetBrains Mono',monospace;text-align:right;padding:16px 16px 16px 8px;border-bottom:1px solid var(--ink-300);">{{ dateFormat "2006.01.02" .PublishDate }}</td>
+          <td style="width:16px;text-align:right;color:var(--ink-900);padding:16px 8px;border-bottom:1px solid var(--ink-300);">&rarr;</td>
+        </tr>
+        {{ end }}
+      </tbody>
+    </table>
+  </section>
+
+  {{ /* About */ }}
+  <section id="about" style="padding:24px 0;border-top:1px solid var(--ink-900);margin-top:24px;">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;padding:16px 0;flex-wrap:wrap;gap:8px;">
+      <h2 style="font-size:clamp(28px,4vw,44px);line-height:1;font-weight:500;letter-spacing:-0.022em;margin:0;color:var(--ink-900);">About</h2>
+      <span style="font-size:11px;color:var(--ink-500);letter-spacing:1px;font-family:'JetBrains Mono',monospace;">Speaker · @{{ .Site.Params.instagram }}</span>
+    </div>
+    {{ with .Content }}<div class="prose" style="max-width:68ch;padding-top:8px;">{{ . }}</div>{{ end }}
+  </section>
+
+  {{ partial "footer.html" . }}
+</main>
+{{ end }}

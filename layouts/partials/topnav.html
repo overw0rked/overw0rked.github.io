@@ -1,0 +1,19 @@
+<header class="topnav">
+  <a href="{{ .Site.BaseURL }}" class="logo" title="oa.log home">oa</a>
+  <div class="util">
+    <span class="util-item lang" id="langWrap"><b id="langActive">ES</b> / <span id="langOther" style="color: var(--ink-300);">EN</span></span>
+    <span class="util-item heart" id="oaHeart" role="button" tabindex="0" aria-label="Like this page">&hearts; <span class="count" id="heartCount">42</span></span>
+    <span class="util-item clock" id="oaClock" aria-live="polite">·</span>
+  </div>
+  <div class="util">
+    <a href="mailto:{{ .Site.Params.email }}" class="util-item email" style="color: var(--ink-500); text-decoration: none;">{{ .Site.Params.email }}</a>
+    <button class="mode" id="oaMode" aria-label="Toggle theme"></button>
+  </div>
+  <nav class="menu">
+    <a href="{{ "/#log" | relURL }}"{{ if .IsHome }} class="current"{{ end }}>Log</a>
+    <a href="{{ "/stage/" | relURL }}"{{ if eq .Section "stage" }} class="current"{{ end }}>Stage</a>
+    <a href="{{ "/blog/" | relURL }}"{{ if eq .Section "blog" }} class="current"{{ end }}>Blog</a>
+    <a href="{{ "/#about" | relURL }}">About</a>
+    <a href="mailto:{{ .Site.Params.email }}" class="dim">Contacto</a>
+  </nav>
+</header>

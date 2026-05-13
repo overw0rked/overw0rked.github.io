@@ -3,4 +3,8 @@ node_modules/
 .vscode/
 .idea/
 *.log
-.DS_Store
+
+# Hugo build artifacts
+public/
+resources/_gen/
+.hugo_build.lock

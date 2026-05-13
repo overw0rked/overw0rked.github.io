@@ -1,0 +1,51 @@
+baseURL = 'https://overw0rked.github.io/'
+languageCode = 'es-MX'
+title = 'oa.log · Osvaldo Ayala'
+defaultContentLanguage = 'es'
+enableRobotsTXT = true
+enableEmoji = false
+buildDrafts = false
+buildFuture = false
+
+# Hugo will copy these to public/ as-is
+[module]
+  [[module.mounts]]
+    source = "static"
+    target = "static"
+
+[permalinks]
+  blog = "/blog/:slug/"
+  stage = "/stage/:slug/"
+
+[taxonomies]
+  tag = "tags"
+  kind = "kinds"
+
+[params]
+  author = "Osvaldo Ayala"
+  description = "El log de Osvaldo · builds · writes · talks · makes desde Ciudad de México."
+  email = "osvaldo@creatorscrate.cc"
+  instagram = "oa.log"
+  github = "overw0rked"
+  linkedin = "osvaldoayala"
+  siteUrl = "https://overw0rked.github.io"
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true  # allow inline HTML in markdown for editorial moments
+  [markup.highlight]
+    style = "github"
+    noClasses = false
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+
+[outputFormats]
+  [outputFormats.RSS]
+    mediatype = "application/rss+xml"
+    baseName = "feed"
+
+[minify]
+  disableHTML = false
+  minifyOutput = true

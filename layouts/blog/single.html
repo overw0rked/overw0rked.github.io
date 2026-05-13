@@ -1,0 +1,37 @@
+{{ define "main" }}
+<main class="container-prose" id="main">
+  <header class="mini-nav">
+    <div class="mini-nav-left">
+      <a href="{{ "/" | relURL }}" class="logo">oa</a>
+      <a href="{{ "/blog/" | relURL }}" class="back-link"><span class="arr">←</span> Blog</a>
+    </div>
+    <button class="mode" id="oaMode" aria-label="Toggle theme"></button>
+  </header>
+
+  <article>
+    <header style="padding:clamp(28px,5vw,56px) 0 clamp(20px,3vw,36px);border-bottom:1px solid var(--ink-300);margin-bottom:clamp(32px,4.6vw,48px);">
+      <div style="display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--ink-500);font-family:'JetBrains Mono',monospace;margin-bottom:24px;">
+        <span style="color:var(--accent);">{{ printf "%02d" .Weight | default "01" }}</span>
+        {{ .Params.category | default "Ensayo" }}
+      </div>
+      <h1 style="font-size:clamp(36px,6vw,72px);line-height:1.04;font-weight:500;letter-spacing:-0.028em;color:var(--ink-900);margin:0 0 22px;">{{ .Title | safeHTML }}</h1>
+      {{ with .Description }}<p style="font-size:clamp(16px,2vw,22px);line-height:1.45;color:var(--ink-500);margin:0 0 28px;font-weight:400;">{{ . }}</p>{{ end }}
+      <div style="display:flex;gap:12px 18px;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--ink-500);font-family:'JetBrains Mono',monospace;flex-wrap:wrap;">
+        <span><b style="color:var(--ink-900);">{{ dateFormat "02 January 2006" .PublishDate }}</b></span>
+        <span style="color:var(--ink-300);">·</span>
+        {{ with .Params.readingTime }}<span>{{ . }} de lectura</span><span style="color:var(--ink-300);">·</span>{{ end }}
+        <span><b style="color:var(--ink-900);">{{ .Site.Params.author }}</b></span>
+      </div>
+    </header>
+
+    <div class="prose">
+      {{ .Content }}
+    </div>
+
+    <footer style="display:flex;justify-content:space-between;padding:32px 0 24px;border-top:1px solid var(--ink-900);margin-top:48px;font-size:11px;color:var(--ink-500);flex-wrap:wrap;gap:16px;font-family:'JetBrains Mono',monospace;">
+      <p>Publicado <b style="color:var(--ink-900);">{{ dateFormat "02 January 2006" .PublishDate }}</b></p>
+      <a href="{{ "/blog/" | relURL }}" class="back-link"><span class="arr">←</span> Volver al blog</a>
+    </footer>
+  </article>
+</main>
+{{ end }}

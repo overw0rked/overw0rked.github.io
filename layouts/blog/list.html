@@ -1,0 +1,42 @@
+{{ define "main" }}
+<main class="container-narrow" id="main">
+  <header class="mini-nav">
+    <div class="mini-nav-left">
+      <a href="{{ "/" | relURL }}" class="logo">oa</a>
+      <a href="{{ "/" | relURL }}" class="back-link"><span class="arr">←</span> Volver a oa.log</a>
+    </div>
+    <button class="mode" id="oaMode" aria-label="Toggle theme"></button>
+  </header>
+
+  <section style="padding:clamp(36px,6vw,72px) 0 clamp(24px,4vw,48px);border-bottom:1px solid var(--ink-300);margin-bottom:48px;">
+    <div style="font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--ink-500);font-family:'JetBrains Mono',monospace;margin-bottom:24px;">// Blog · writes</div>
+    <h1 style="font-size:clamp(72px,14vw,200px);line-height:0.9;font-weight:500;letter-spacing:-0.045em;margin:0 0 24px;color:var(--ink-900);">{{ .Title }}<span style="color:var(--accent);">.</span></h1>
+    <p style="font-size:clamp(16px,2vw,22px);line-height:1.5;color:var(--ink-500);margin:0;max-width:56ch;">{{ .Description | default "Ensayos, notas y manifiestos sobre emprender en México, construir con IA, y diseñar como si importara." }}</p>
+  </section>
+
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:24px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-500);">
+    <span><b style="color:var(--ink-900);">{{ printf "%02d" (len .Pages) }} posts</b> · ordenados por fecha</span>
+    {{ with (index .Pages.ByPublishDate.Reverse 0) }}<span>Actualizado {{ dateFormat "2006.01.02" .PublishDate }}</span>{{ end }}
+  </div>
+
+  <div style="display:flex;flex-direction:column;">
+    {{ range $i, $p := .Pages.ByPublishDate.Reverse }}
+    <a class="post-card" href="{{ .RelPermalink }}" style="display:grid;grid-template-columns:80px 1fr auto;gap:clamp(16px,2.4vw,32px);padding:clamp(24px,3.6vw,36px) 0;border-bottom:1px solid var(--ink-300);text-decoration:none;color:inherit;position:relative;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-300);font-variant-numeric:tabular-nums;padding-top:6px;">{{ printf "%02d" (add $i 1) }}</div>
+      <div style="min-width:0;">
+        <div style="font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:var(--ink-500);font-family:'JetBrains Mono',monospace;margin-bottom:10px;display:flex;gap:14px;flex-wrap:wrap;">
+          <span style="color:var(--ink-900);">{{ dateFormat "2006.01.02" .PublishDate }}</span>
+          {{ with .Params.readingTime }}<span>· {{ . }} de lectura</span>{{ end }}
+        </div>
+        <h2 style="font-size:clamp(24px,3.6vw,44px);line-height:1.06;font-weight:500;letter-spacing:-0.022em;margin:0 0 12px;color:var(--ink-900);max-width:24ch;">{{ .Title | safeHTML }}</h2>
+        <p style="font-size:clamp(14px,1.6vw,17px);line-height:1.55;color:var(--ink-500);margin:0 0 14px;max-width:56ch;">{{ .Description }}</p>
+        {{ with .Params.tags }}<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:14px;">{{ range . }}<span style="padding:3px 10px;border:1px solid var(--ink-300);border-radius:999px;font-size:10px;color:var(--ink-500);font-family:'JetBrains Mono',monospace;">{{ . }}</span>{{ end }}</div>{{ end }}
+      </div>
+      <div style="font-size:18px;color:var(--ink-900);padding-top:4px;">→</div>
+    </a>
+    {{ end }}
+  </div>
+
+  {{ partial "footer.html" . }}
+</main>
+{{ end }}

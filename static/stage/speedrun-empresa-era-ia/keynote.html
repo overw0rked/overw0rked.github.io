@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F4F4F2">
+  <title>Speedrun — Keynote · oa.log</title>
+  <meta name="description" content="Speedrun: empresa de nuevo en la era de IA — keynote para Playas on Tech 2026.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23F4F4F2'/%3E%3Ctext x='8' y='12' font-family='Inter,sans-serif' font-size='10' font-weight='500' text-anchor='middle' fill='%23131313'%3Eoa%3C/text%3E%3Ccircle cx='13' cy='3' r='1.5' fill='%23FF202B'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #F4F4F2; }
+    body { font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    .deck { --paper: #F4F4F2; --ink-900: #131313; --ink-500: #474747; --ink-300: #BCBCBC; --ink-100: #E5E3DD; --accent: #FF202B; position: fixed; inset: 0; background: var(--paper); color: var(--ink-900); }
+    .deck h1, .deck h2, .deck h3, .deck h4 { color: var(--ink-900); }
+    .deck-progress { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--ink-300); z-index: 5; }
+    .deck-progress-fill { height: 100%; background: var(--accent); width: 5.3%; transition: width 380ms cubic-bezier(0.2,0.85,0.2,1); }
+    .slide { position: absolute; inset: 0; padding: clamp(20px, 3vw, 36px) clamp(28px, 4vw, 56px) clamp(18px, 2.4vw, 28px); display: flex; flex-direction: column; box-sizing: border-box; opacity: 0; transition: opacity 320ms ease; pointer-events: none; }
+    .slide.active { opacity: 1; pointer-events: auto; }
+    .slide-top { display: flex; justify-content: space-between; align-items: center; font-size: clamp(10px, 1vw, 12px); letter-spacing: 1.4px; color: var(--ink-500); text-transform: uppercase; padding-bottom: 10px; border-bottom: 0.5px solid var(--ink-300); font-family: 'JetBrains Mono', monospace; }
+    .slide-top .logo { display: inline-flex; align-items: center; gap: 8px; }
+    .slide-top .logo-mark { width: 16px; height: 16px; border: 1px solid var(--ink-900); border-radius: 2px; display: inline-flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 500; color: var(--ink-900); font-family: 'Inter', sans-serif; }
+    .slide-top .counter { color: var(--ink-900); }
+    .slide-top .now-dot { display: inline-block; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; margin-right: 6px; vertical-align: middle; position: relative; }
+    .slide-top .now-dot::after { content: ''; position: absolute; inset: 0; border-radius: 50%; border: 1.5px solid var(--accent); animation: pulse 1.8s ease-out infinite; }
+    @keyframes pulse { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(3); opacity: 0; } }
+
+    .anim-up, .anim-up-sm, .anim-scale, .anim-pop, .anim-letter, .anim-fade { transition: none; }
+    .anim-up { opacity: 0; transform: translateY(20px); }
+    .anim-up-sm { opacity: 0; transform: translateY(10px); }
+    .anim-scale { opacity: 0; transform: scale(0.88); }
+    .anim-pop { opacity: 0; transform: scale(0); }
+    .anim-letter { opacity: 0; transform: translateY(0.35em); display: inline-block; color: var(--ink-900); }
+    .anim-letter.red { color: var(--accent); }
+    .anim-fade { opacity: 0; }
+    .slide.in .anim-up { opacity: 1; transform: translateY(0); transition: opacity 540ms cubic-bezier(0.22,0.85,0.22,1) var(--d,0ms), transform 600ms cubic-bezier(0.22,0.85,0.22,1) var(--d,0ms); }
+    .slide.in .anim-up-sm { opacity: 1; transform: translateY(0); transition: opacity 420ms ease var(--d,0ms), transform 480ms cubic-bezier(0.22,0.85,0.22,1) var(--d,0ms); }
+    .slide.in .anim-scale { opacity: 1; transform: scale(1); transition: opacity 500ms ease var(--d,0ms), transform 580ms cubic-bezier(0.22,1.15,0.32,1) var(--d,0ms); }
+    .slide.in .anim-pop { opacity: 1; transform: scale(1); transition: opacity 300ms ease var(--d,0ms), transform 440ms cubic-bezier(0.22,1.4,0.4,1) var(--d,0ms); }
+    .slide.in .anim-letter { opacity: 1; transform: translateY(0); transition: opacity 380ms ease var(--d,0ms), transform 480ms cubic-bezier(0.22,0.85,0.22,1) var(--d,0ms); }
+    .slide.in .anim-fade { opacity: 1; transition: opacity 540ms ease var(--d,0ms); }
+
+    .slide-cover { justify-content: space-between; }
+    .slide-cover .hero { font-size: clamp(64px, 11vw, 160px); line-height: 0.9; font-weight: 500; letter-spacing: -0.045em; margin: clamp(14px, 2vw, 28px) 0 0; color: var(--ink-900); }
+    .slide-cover .hero .red, .slide-cierre .hero .red { color: var(--accent); }
+    .slide-cover .sub { font-size: clamp(14px, 1.5vw, 20px); line-height: 1.3; color: var(--ink-500); max-width: 56ch; margin: clamp(10px, 1.4vw, 18px) 0 0; }
+    .meta-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(12px, 1.8vw, 20px); padding-top: clamp(12px, 1.6vw, 18px); border-top: 0.5px solid var(--ink-900); }
+    .meta-col .label { font-size: 9px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--ink-300); margin-bottom: 5px; font-family: 'JetBrains Mono', monospace; }
+    .meta-col .val { font-size: clamp(11px, 1.1vw, 14px); color: var(--ink-900); font-weight: 500; line-height: 1.25; }
+    .meta-col .val small { display: block; font-weight: 400; color: var(--ink-500); font-size: clamp(10px, 1vw, 12px); margin-top: 2px; }
+
+    .slide-about { display: grid; grid-template-rows: auto 1fr auto; gap: clamp(12px, 1.8vw, 20px); }
+    .about-body { display: grid; grid-template-columns: minmax(180px, 22%) 1fr; gap: clamp(20px, 3vw, 36px); padding-top: 6px; align-items: start; }
+    .about-visual { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; border: 0.5px solid var(--ink-900); border-radius: 2px; overflow: hidden; aspect-ratio: 1; }
+    .about-kind { padding: clamp(8px, 1vw, 14px) clamp(10px, 1.2vw, 16px); border-right: 0.5px solid var(--ink-300); border-bottom: 0.5px solid var(--ink-300); display: flex; flex-direction: column; justify-content: space-between; position: relative; color: var(--ink-900); }
+    .about-kind:nth-child(2n) { border-right: none; }
+    .about-kind:nth-child(n+3) { border-bottom: none; }
+    .about-kind .count { font-size: clamp(28px, 3.6vw, 44px); line-height: 0.95; font-weight: 500; color: var(--ink-900); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+    .about-kind .label { font-size: clamp(9px, 1vw, 11px); letter-spacing: 1px; text-transform: uppercase; color: var(--ink-500); font-family: 'JetBrains Mono', monospace; }
+    .about-kind.active { background: var(--ink-900); }
+    .about-kind.active .count, .about-kind.active .label { color: var(--paper); }
+    .about-kind.active::after { content: ''; position: absolute; top: 8px; right: 8px; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+    .about-content h2 { font-size: clamp(36px, 5.4vw, 76px); line-height: 0.95; letter-spacing: -0.035em; font-weight: 500; margin: 0 0 8px; color: var(--ink-900); }
+    .about-content .role { font-size: clamp(10px, 1vw, 12px); color: var(--ink-500); margin: 0 0 16px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 1.2px; }
+    .about-content .bio { font-size: clamp(13px, 1.4vw, 17px); line-height: 1.5; color: var(--ink-500); margin: 0; max-width: 52ch; }
+    .about-content .bio b { color: var(--ink-900); font-weight: 500; }
+    .about-socials { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(12px, 1.4vw, 16px); padding-top: clamp(10px, 1.4vw, 14px); border-top: 0.5px solid var(--ink-900); }
+    .about-social .label { font-size: 9px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--ink-300); margin-bottom: 4px; font-family: 'JetBrains Mono', monospace; }
+    .about-social .handle { font-size: clamp(11px, 1.2vw, 14px); font-weight: 500; color: var(--ink-900); }
+
+    .slide-roadmap { display: grid; grid-template-rows: auto auto 1fr auto; gap: clamp(8px, 1.2vw, 12px); }
+    .roadmap-head h2 { font-size: clamp(28px, 4vw, 48px); line-height: 0.95; letter-spacing: -0.028em; font-weight: 500; margin: 6px 0 4px; color: var(--ink-900); }
+    .roadmap-head h2 .red { color: var(--accent); }
+    .roadmap-head .sub { font-size: clamp(11px, 1.2vw, 14px); color: var(--ink-500); margin: 0; }
+    .roadmap-grid { display: flex; flex-direction: column; border-top: 0.5px solid var(--ink-900); border-bottom: 0.5px solid var(--ink-900); }
+    .roadmap-phase { display: grid; grid-template-columns: clamp(80px, 9vw, 130px) repeat(5, 1fr); align-items: stretch; flex: 1; }
+    .roadmap-phase:not(:last-child) { border-bottom: 0.5px solid var(--ink-300); }
+    .roadmap-phase-label { font-size: clamp(9px, 1vw, 11px); letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink-500); padding: 8px 12px; font-family: 'JetBrains Mono', monospace; display: flex; flex-direction: column; justify-content: center; border-right: 0.5px solid var(--ink-300); line-height: 1.3; }
+    .roadmap-phase-label b { color: var(--ink-900); font-weight: 500; }
+    .roadmap-cell { padding: clamp(6px, 0.9vw, 10px) clamp(10px, 1.2vw, 14px); border-right: 0.5px solid var(--ink-300); display: flex; flex-direction: column; justify-content: space-between; min-height: 50px; transition: background 160ms ease; cursor: pointer; color: var(--ink-900); }
+    .roadmap-cell:last-child { border-right: none; }
+    .roadmap-cell:hover { background: rgba(19,19,19,0.04); }
+    .roadmap-cell .num { font-size: clamp(18px, 2vw, 26px); font-weight: 500; line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+    .roadmap-cell .lbl { font-size: clamp(9px, 1vw, 12px); color: var(--ink-500); line-height: 1.15; }
+    .roadmap-cell.active { background: var(--ink-900); position: relative; }
+    .roadmap-cell.active .num, .roadmap-cell.active .lbl { color: var(--paper); }
+    .roadmap-cell.active::after { content: ''; position: absolute; top: 6px; right: 6px; width: 5px; height: 5px; background: var(--accent); border-radius: 50%; }
+    .roadmap-foot { display: flex; justify-content: space-between; font-size: clamp(10px, 1vw, 12px); letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink-500); font-family: 'JetBrains Mono', monospace; padding-top: 4px; }
+    .roadmap-foot b { color: var(--ink-900); }
+
+    .slide-step { display: grid; grid-template-rows: auto 1fr auto; }
+    .step-body { display: grid; grid-template-columns: minmax(180px, 22%) 1fr; gap: clamp(20px, 3vw, 40px); padding-top: clamp(14px, 2vw, 24px); align-items: start; }
+    .step-num { font-size: clamp(120px, 18vw, 240px); line-height: 0.82; font-weight: 500; letter-spacing: -0.05em; color: var(--ink-900); font-variant-numeric: tabular-nums; }
+    .step-content { padding-top: clamp(6px, 1vw, 12px); }
+    .step-title { font-size: clamp(28px, 4vw, 56px); line-height: 1.05; font-weight: 500; letter-spacing: -0.022em; color: var(--ink-900); margin: 0 0 clamp(10px, 1.4vw, 18px); max-width: 22ch; }
+    .step-body-text { font-size: clamp(14px, 1.5vw, 20px); line-height: 1.55; color: var(--ink-500); margin: 0; max-width: 50ch; }
+    .step-foot { display: flex; justify-content: space-between; align-items: center; padding-top: clamp(10px, 1.4vw, 16px); border-top: 0.5px solid var(--ink-300); margin-top: auto; font-size: clamp(10px, 1vw, 12px); letter-spacing: 1.4px; text-transform: uppercase; color: var(--ink-500); font-family: 'JetBrains Mono', monospace; }
+    .step-foot .unlock { display: inline-flex; align-items: center; gap: 8px; color: var(--ink-900); }
+    .step-foot .unlock .label { color: var(--ink-300); }
+    .step-foot .unlock .arrow { color: var(--accent); font-size: clamp(13px, 1.4vw, 16px); display: inline-block; }
+    .slide.in .step-foot .unlock .arrow { animation: arrow-bob 1.8s ease-in-out infinite; animation-delay: 900ms; }
+    @keyframes arrow-bob { 0%,100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
+
+    .slide-cierre { justify-content: space-between; }
+    .slide-cierre .hero { font-size: clamp(56px, 10vw, 144px); line-height: 0.95; font-weight: 500; letter-spacing: -0.04em; margin: clamp(18px, 2.4vw, 32px) 0 0; color: var(--ink-900); }
+    .slide-cierre .sub { font-size: clamp(13px, 1.4vw, 18px); line-height: 1.4; color: var(--ink-500); max-width: 48ch; margin: clamp(10px, 1.4vw, 16px) 0 0; font-style: italic; }
+
+    .deck-nav-zone { position: absolute; top: 0; bottom: 0; width: 35%; cursor: pointer; z-index: 3; border: 0; background: transparent; }
+    .deck-nav-zone.prev { left: 0; }
+    .deck-nav-zone.next { right: 0; }
+
+    /* Controls bar at bottom */
+    .deck-controls { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; align-items: center; gap: 14px; background: rgba(244, 244, 242, 0.92); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 8px 16px; border: 0.5px solid var(--ink-300); border-radius: 999px; opacity: 0; transition: opacity 240ms ease; }
+    .deck:hover .deck-controls, .deck-controls:focus-within { opacity: 1; }
+    .deck-btn { width: 28px; height: 28px; border: 0; background: transparent; color: var(--ink-900); cursor: pointer; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; transition: background 160ms ease; font-size: 16px; }
+    .deck-btn:hover { background: var(--ink-100); }
+    .deck-counter { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-900); letter-spacing: 1px; min-width: 56px; text-align: center; font-variant-numeric: tabular-nums; }
+    .deck-btn-fs { width: auto; padding: 0 12px; font-size: 10px; font-family: 'JetBrains Mono', monospace; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-500); }
+    .deck-btn-fs:hover { color: var(--accent); background: transparent; }
+  </style>
+</head>
+<body>
+  <div class="deck" id="deck" tabindex="0">
+    <div class="deck-progress"><div class="deck-progress-fill" id="progressFill"></div></div>
+
+    <section class="slide slide-cover active in" data-slide="1">
+      <div class="slide-top anim-fade"><span class="logo"><span class="logo-mark">oa</span> oa.log</span><span>Playas on Tech · Manzanillo · 2026.05.14</span></div>
+      <h1 class="hero" id="coverHero">Speedrun<span class="red">.</span></h1>
+      <p class="sub anim-up" style="--d:1100ms">Esto es lo que haría si tuviera que hacer una empresa de nuevo en la era de <span style="color: var(--ink-900); font-weight: 500;">IA</span>.</p>
+      <div class="meta-row">
+        <div class="meta-col anim-up-sm" style="--d:1300ms"><div class="label">Speaker</div><div class="val">Osvaldo Ayala<small>@oa.log</small></div></div>
+        <div class="meta-col anim-up-sm" style="--d:1400ms"><div class="label">Evento</div><div class="val">Playas on Tech<small>Dev Root Lab</small></div></div>
+        <div class="meta-col anim-up-sm" style="--d:1500ms"><div class="label">Sede</div><div class="val">Manzanillo<small>Colima · México</small></div></div>
+        <div class="meta-col anim-up-sm" style="--d:1600ms"><div class="label">Fecha</div><div class="val">2026.05.14<small>15 min · ES</small></div></div>
+      </div>
+    </section>
+
+    <section class="slide slide-about" data-slide="2">
+      <div class="slide-top anim-fade"><span class="logo"><span class="logo-mark">oa</span> About · @oa.log</span><span class="counter">02 / 19</span></div>
+      <div class="about-body">
+        <div class="about-visual">
+          <div class="about-kind anim-scale" style="--d:100ms"><div class="count">12</div><div class="label">builds</div></div>
+          <div class="about-kind anim-scale" style="--d:200ms"><div class="count">08</div><div class="label">writes</div></div>
+          <div class="about-kind active anim-scale" style="--d:300ms"><div class="count">04</div><div class="label">talks</div></div>
+          <div class="about-kind anim-scale" style="--d:400ms"><div class="count">24</div><div class="label">makes</div></div>
+        </div>
+        <div class="about-content">
+          <h2 class="anim-up" style="--d:200ms">Osvaldo Ayala.</h2>
+          <p class="role anim-up" style="--d:380ms">Builder · Founder, Creators Crate · CDMX</p>
+          <p class="bio anim-up" style="--d:520ms">Construye herramientas y agentes <b>IA</b> para emprendedores y creadores en México. Apila identidades: <b>founder</b>, <b>dev</b>, <b>speaker</b>, <b>creator</b>. Obsesionado con quitarle fricción al verbo <b>emprender</b> en México.</p>
+        </div>
+      </div>
+      <div class="about-socials">
+        <div class="about-social anim-up-sm" style="--d:680ms"><div class="label">Instagram</div><div class="handle">@oa.log</div></div>
+        <div class="about-social anim-up-sm" style="--d:760ms"><div class="label">GitHub</div><div class="handle">@overw0rked</div></div>
+        <div class="about-social anim-up-sm" style="--d:840ms"><div class="label">LinkedIn</div><div class="handle">osvaldoayala</div></div>
+        <div class="about-social anim-up-sm" style="--d:920ms"><div class="label">Site</div><div class="handle">oa.log</div></div>
+      </div>
+    </section>
+
+    <section class="slide slide-roadmap" data-slide="3">
+      <div class="slide-top anim-fade"><span class="logo"><span class="logo-mark">oa</span> El mapa · 15 cuellos · 3 fases</span><span class="counter">03 / 19</span></div>
+      <div class="roadmap-head"><h2 class="anim-up" style="--d:120ms">El mapa<span class="red">.</span></h2><p class="sub anim-up" style="--d:280ms">Cada cuello desbloquea el siguiente. Clic en cualquier celda para saltar al paso.</p></div>
+      <div class="roadmap-grid">
+        <div class="roadmap-phase">
+          <div class="roadmap-phase-label anim-fade" style="--d:400ms"><b>Fase 01</b><span>Validate</span><span>& Build</span></div>
+          <div class="roadmap-cell active anim-scale" style="--d:440ms" data-step="4"><div class="num">01</div><div class="lbl">Cronología</div></div>
+          <div class="roadmap-cell anim-scale" style="--d:480ms" data-step="5"><div class="num">02</div><div class="lbl">Queryable</div></div>
+          <div class="roadmap-cell anim-scale" style="--d:520ms" data-step="6"><div class="num">03</div><div class="lbl">Validación</div></div>
+          <div class="roadmap-cell anim-scale" style="--d:560ms" data-step="7"><div class="num">04</div><div class="lbl">Finanzas</div></div>
+          <div class="roadmap-cell anim-scale" style="--d:600ms" data-step="8"><div class="num">05</div><div class="lbl">Fiscal</div></div>
+        </div>
+        <div class="roadmap-phase">
+          <div class="roadmap-phase-label anim-fade" style="--d:640ms"><b>Fase 02</b><span>Go to</span><span>Market</span></div>
+          <div class="roadmap-cell anim-scale" style="--d:680ms" data-step="9"><div class="num">06</div><div class="lbl">Marca</div></div>
+          <div class="roadmap-cell anim-scale" style="--d:720ms" data-step="10"><div class="num">07</div><div class="lbl">CRM</div></div>
+          <div class="roadmap-cell anim-scale" style="--d:760ms" data-step="11"><div class="num">08</div><div class="lbl">WhatsApp</div></div>
+          <div class="roadmap-cell anim-scale" style="--d:800ms" data-step="12"><div class="num">09</div><div class="lbl">Breakeven</div></div>
+          <div class="roadmap-cell anim-scale" style="--d:840ms" data-step="13"><div class="num">10</div><div class="lbl">Socios</div></div>
+        </div>
+        <div class="roadmap-phase">
+          <div class="roadmap-phase-label anim-fade" style="--d:880ms"><b>Fase 03</b><span>Formalize</span><span>& Scale</span></div>
+          <div class="roadmap-cell anim-scale" style="--d:920ms" data-step="14"><div class="num">11</div><div class="lbl">Comms</div></div>
+          <div class="roadmap-cell anim-scale" style="--d:960ms" data-step="15"><div class="num">12</div><div class="lbl">Constitución</div></div>
+          <div class="roadmap-cell anim-scale" style="--d:1000ms" data-step="16"><div class="num">13</div><div class="lbl">Crédito</div></div>
+          <div class="roadmap-cell anim-scale" style="--d:1040ms" data-step="17"><div class="num">14</div><div class="lbl">Asambleas</div></div>
+          <div class="roadmap-cell anim-scale" style="--d:1080ms" data-step="18"><div class="num">15</div><div class="lbl">Contratar</div></div>
+        </div>
+      </div>
+      <div class="roadmap-foot anim-fade" style="--d:1200ms"><span><b>Aquí estamos</b> · empezamos el speedrun</span><span>15 cuellos · ~50s c/u · 15 min total</span></div>
+    </section>
+
+    <section class="slide slide-step" data-slide="4"><div class="slide-top anim-fade"><span class="logo"><span class="logo-mark">oa</span> Paso 01 · Cronología</span><span class="counter"><span class="now-dot"></span>04 / 19</span></div><div class="step-body"><div class="step-num anim-pop" style="--d:80ms">01</div><div class="step-content"><h2 class="step-title anim-up" style="--d:240ms">Hay un orden.</h2><p class="step-body-text anim-up" style="--d:380ms">Vas a sentir que todo importa al mismo tiempo. No. Hay un orden, y este speedrun lo recorre. Cada cuello que resuelves revela el siguiente — el progreso constante es la verdadera moneda de la motivación.</p></div></div><div class="step-foot anim-fade" style="--d:540ms"><span class="unlock"><span class="label">Desbloquea</span><span class="arrow">→</span> Saber dónde estás parado</span><span class="cat">Cronología</span></div></section>
+
+    <section class="slide slide-step" data-slide="5"><div class="slide-top anim-fade"><span class="logo"><span class="logo-mark">oa</span> Paso 02 · Queryable company</span><span class="counter"><span class="now-dot"></span>05 / 19</span></div><div class="step-body"><div class="step-num anim-pop" style="--d:80ms">02</div><div class="step-content"><h2 class="step-title anim-up" style="--d:240ms">Queryable desde el día cero.</h2><p class="step-body-text anim-up" style="--d:380ms">Notion + Drive estructurado + decisions log. Antes de cualquier línea de código. Que un LLM pueda leer tu empresa — dentro de 6 meses te ahorra un consultor cada mes.</p></div></div><div class="step-foot anim-fade" style="--d:540ms"><span class="unlock"><span class="label">Desbloquea</span><span class="arrow">→</span> Velocidad sin perder contexto</span><span class="cat">Prep work</span></div></section>
+
+    <section class="slide slide-step" data-slide="6"><div class="slide-top anim-fade"><span class="logo"><span class="logo-mark">oa</span> Paso 03 · Validación</span><span class="counter"><span class="now-dot"></span>06 / 19</span></div><div class="step-body"><div class="step-num anim-pop" style="--d:80ms">03</div><div class="step-content"><h2 class="step-title anim-up" style="--d:240ms">No abras nada legal antes de cobrar.</h2><p class="step-body-text anim-up" style="--d:380ms">10 conversaciones de 15 min. Prototipo ≠ validación. La validación se mide en dinero o compromiso firmado. En la era IA puedes prototipar en horas — eso es un demo bonito, no validación.</p></div></div><div class="step-foot anim-fade" style="--d:540ms"><span class="unlock"><span class="label">Desbloquea</span><span class="arrow">→</span> Dirección clara</span><span class="cat">Nail it then scale it</span></div></section>
+
+    <section class="slide slide-step" data-slide="7"><div class="slide-top anim-fade"><span class="logo"><span class="logo-mark">oa</span> Paso 04 · Finanzas</span><span class="counter"><span class="now-dot"></span>07 / 19</span></div><div class="step-body"><div class="step-num anim-pop" style="--d:80ms">04</div><div class="step-content"><h2 class="step-title anim-up" style="--d:240ms">La cuenta del negocio no es tu cuenta personal.</h2><p class="step-body-text anim-up" style="--d:380ms">Cuenta separada día 1. Balance sheet básico en una hoja. Runway en meses, no en sensaciones. Mezclar cuentas es el error #1 que cuesta el doble después en contabilidad.</p></div></div><div class="step-foot anim-fade" style="--d:540ms"><span class="unlock"><span class="label">Desbloquea</span><span class="arrow">→</span> Visibilidad financiera real</span><span class="cat">Pragmatic finance</span></div></section>
+
+    <section class="slide slide-step" data-slide="8"><div class="slide-top anim-fade"><span class="logo"><span class="logo-mark">oa</span> Paso 05 · Fiscalización</span><span class="counter"><span class="now-dot"></span>08 / 19</span></div><div class="step-body"><div class="step-num anim-pop" style="--d:80ms">05</div><div class="step-content"><h2 class="step-title anim-up" style="--d:240ms">Si no facturas, no existes.</h2><p class="step-body-text anim-up" style="--d:380ms">Alegra + Facturapi + contadora externa. Día 1, no después. Webhook + API = factura como deploy. El SAT no perdona, pero la prevención cuesta menos que regularizar.</p></div></div><div class="step-foot anim-fade" style="--d:540ms"><span class="unlock"><span class="label">Desbloquea</span><span class="arrow">→</span> Cobrar formalmente</span><span class="cat">SAT · México</span></div></section>
+
+    <section class="slide slide-step" data-slide="9"><div class="slide-top anim-fade"><span class="logo"><span class="logo-mark">oa</span> Paso 06 · Marca</span><span class="counter"><span class="now-dot"></span>09 / 19</span></div><div class="step-body"><div class="step-num anim-pop" style="--d:80ms">06</div><div class="step-content"><h2 class="step-title anim-up" style="--d:240ms">Registra la marca antes del branding.</h2><p class="step-body-text anim-up" style="--d:380ms">50 nombres con Claude → batch check de dominio · IG · IMPI → registra por clase (~$3k MXN). Lo que era una semana de research hoy es una tarde. El que llega primero al IMPI gana.</p></div></div><div class="step-foot anim-fade" style="--d:540ms"><span class="unlock"><span class="label">Desbloquea</span><span class="arrow">→</span> Defensibilidad</span><span class="cat">IMPI · Trademark</span></div></section>
+
+    <section class="slide slide-step" data-slide="10"><div class="slide-top anim-fade"><span class="logo"><span class="logo-mark">oa</span> Paso 07 · CRM</span><span class="counter"><span class="now-dot"></span>10 / 19</span></div><div class="step-body"><div class="step-num anim-pop" style="--d:80ms">07</div><div class="step-content"><h2 class="step-title anim-up" style="--d:240ms">El follow-up es el producto.</h2><p class="step-body-text anim-up" style="--d:380ms">HubSpot free o Folk. Plantilla de cotización. Workflow día 1 · 3 · 7 · 14. Empieza manual antes de automatizar — si no entiendes el proceso, no lo automatizas. En B2B, perdiste cero leads.</p></div></div><div class="step-foot anim-fade" style="--d:540ms"><span class="unlock"><span class="label">Desbloquea</span><span class="arrow">→</span> Pipeline visible</span><span class="cat">B2B · CRM</span></div></section>
+
+    <section class="slide slide-step" data-slide="11"><div class="slide-top anim-fade"><span class="logo"><span class="logo-mark">oa</span> Paso 08 · WhatsApp</span><span class="counter"><span class="now-dot"></span>11 / 19</span></div><div class="step-body"><div class="step-num anim-pop" style="--d:80ms">08</div><div class="step-content"><h2 class="step-title anim-up" style="--d:240ms">Tus clientes están en WhatsApp.</h2><p class="step-body-text anim-up" style="--d:380ms">No en email. No en LinkedIn. Kapso + agente con contexto = canal con mejor ROI de IA en México. Lo que era ciencia ficción hace 2 años hoy lo arma un dev junior en una semana.</p></div></div><div class="step-foot anim-fade" style="--d:540ms"><span class="unlock"><span class="label">Desbloquea</span><span class="arrow">→</span> Comunicación que escala</span><span class="cat">Meta · Comms</span></div></section>
+
+    <section class="slide slide-step" data-slide="12"><div class="slide-top anim-fade"><span class="logo"><span class="logo-mark">oa</span> Paso 09 · Breakeven</span><span class="counter"><span class="now-dot"></span>12 / 19</span></div><div class="step-body"><div class="step-num anim-pop" style="--d:80ms">09</div><div class="step-content"><h2 class="step-title anim-up" style="--d:240ms">Es un número, no una sensación.</h2><p class="step-body-text anim-up" style="--d:380ms">¿Cuántas unidades/clientes al mes para cubrir tus costos fijos? Costos fijos ÷ (precio − costo variable). Sácalo hoy. En una hoja. Simulaciones de sensibilidad con Claude en 2 min.</p></div></div><div class="step-foot anim-fade" style="--d:540ms"><span class="unlock"><span class="label">Desbloquea</span><span class="arrow">→</span> Claridad del objetivo mensual</span><span class="cat">Unit economics</span></div></section>
+
+    <section class="slide slide-step" data-slide="13"><div class="slide-top anim-fade"><span class="logo"><span class="logo-mark">oa</span> Paso 10 · Aliados / Socios</span><span class="counter"><span class="now-dot"></span>13 / 19</span></div><div class="step-body"><div class="step-num anim-pop" style="--d:80ms">10</div><div class="step-content"><h2 class="step-title anim-up" style="--d:240ms">Socio sin vesting = problema en 2 años.</h2><p class="step-body-text anim-up" style="--d:380ms">NDA antes de mostrar info sensible. JD claro antes de pedir trabajo. Vesting 4 años, cliff 1. Nunca 50/50 sin tie-breaker. Claude redacta NDAs y JDs en minutos — los estatutos pásalos por abogado.</p></div></div><div class="step-foot anim-fade" style="--d:540ms"><span class="unlock"><span class="label">Desbloquea</span><span class="arrow">→</span> Poder delegar sin paranoia</span><span class="cat">Equity · Legal</span></div></section>
+
+    <section class="slide slide-step" data-slide="14"><div class="slide-top anim-fade"><span class="logo"><span class="logo-mark">oa</span> Paso 11 · Comunicación interna</span><span class="counter"><span class="now-dot"></span>14 / 19</span></div><div class="step-body"><div class="step-num anim-pop" style="--d:80ms">11</div><div class="step-content"><h2 class="step-title anim-up" style="--d:240ms">Async first.</h2><p class="step-body-text anim-up" style="--d:380ms">Slack + Notion + Loom. Las juntas son el último recurso, no el primero. Resúmenes automáticos con IA — tu meeting de 1h se vuelve memo de 200 palabras en Notion. +50% tiempo productivo por semana.</p></div></div><div class="step-foot anim-fade" style="--d:540ms"><span class="unlock"><span class="label">Desbloquea</span><span class="arrow">→</span> Escalabilidad sin caos</span><span class="cat">Internal comms</span></div></section>
+
+    <section class="slide slide-step" data-slide="15"><div class="slide-top anim-fade"><span class="logo"><span class="logo-mark">oa</span> Paso 12 · Constitución</span><span class="counter"><span class="now-dot"></span>15 / 19</span></div><div class="step-body"><div class="step-num anim-pop" style="--d:80ms">12</div><div class="step-content"><h2 class="step-title anim-up" style="--d:240ms">No constituyas antes de tiempo.</h2><p class="step-body-text anim-up" style="--d:380ms">PFAE → SAPI. Sáltate la SAS si vas por inversión. Brinca cuando metas socio con equity, separes patrimonio o levantes ronda. La SAS suena bonita pero migrarla a SAPI es casi rehacerla.</p></div></div><div class="step-foot anim-fade" style="--d:540ms"><span class="unlock"><span class="label">Desbloquea</span><span class="arrow">→</span> Estructura formal para crecer</span><span class="cat">SAPI · MX</span></div></section>
+
+    <section class="slide slide-step" data-slide="16"><div class="slide-top anim-fade"><span class="logo"><span class="logo-mark">oa</span> Paso 13 · Crédito</span><span class="counter"><span class="now-dot"></span>16 / 19</span></div><div class="step-body"><div class="step-num anim-pop" style="--d:80ms">13</div><div class="step-content"><h2 class="step-title anim-up" style="--d:240ms">Tarjeta corporativa, día uno.</h2><p class="step-body-text anim-up" style="--d:380ms">Clara · Jeeves (USD) · Kapital. Construir historial empresarial toma años. Empieza ya, aunque no la necesites — cuando la necesites, ya es tarde. Diferencia: ~$800k de línea en año 4 vs año 2.</p></div></div><div class="step-foot anim-fade" style="--d:540ms"><span class="unlock"><span class="label">Desbloquea</span><span class="arrow">→</span> Working capital</span><span class="cat">Crédito · Cashflow</span></div></section>
+
+    <section class="slide slide-step" data-slide="17"><div class="slide-top anim-fade"><span class="logo"><span class="logo-mark">oa</span> Paso 14 · Asambleas</span><span class="counter"><span class="now-dot"></span>17 / 19</span></div><div class="step-body"><div class="step-num anim-pop" style="--d:80ms">14</div><div class="step-content"><h2 class="step-title anim-up" style="--d:240ms">Una al año. Mínimo. Es ley.</h2><p class="step-body-text anim-up" style="--d:380ms">Acta + libro de actas + libro de accionistas. El 70% de las SAPIs están en falta — riesgo silencioso que explota cuando llega un inversionista pidiendo due diligence. Claude redacta el acta en 5 minutos.</p></div></div><div class="step-foot anim-fade" style="--d:540ms"><span class="unlock"><span class="label">Desbloquea</span><span class="arrow">→</span> Gobernanza legible</span><span class="cat">Governance</span></div></section>
+
+    <section class="slide slide-step" data-slide="18"><div class="slide-top anim-fade"><span class="logo"><span class="logo-mark">oa</span> Paso 15 · Contrataciones</span><span class="counter"><span class="now-dot"></span>18 / 19</span></div><div class="step-body"><div class="step-num anim-pop" style="--d:80ms">15</div><div class="step-content"><h2 class="step-title anim-up" style="--d:240ms">IMSS antes del primer contrato.</h2><p class="step-body-text anim-up" style="--d:380ms">Alta patronal + RFC empleador + contrato escrito. Outsource nómina día 1: Worky · Runa · Nominapp. No contrates "por honorarios" a alguien que es empleado — el SAT/IMSS lo detecta y la multa es fuerte.</p></div></div><div class="step-foot anim-fade" style="--d:540ms"><span class="unlock"><span class="label">Desbloquea</span><span class="arrow">→</span> Equipo formal y escalable</span><span class="cat">IMSS · LFT</span></div></section>
+
+    <section class="slide slide-cierre" data-slide="19">
+      <div class="slide-top anim-fade"><span class="logo"><span class="logo-mark">oa</span> Fin</span><span class="counter">19 / 19</span></div>
+      <h1 class="hero" id="cierreHero">Empieza por el <span class="red">#2</span>.</h1>
+      <p class="sub anim-up" style="--d:1200ms">La IA cambia el cuándo. No el qué. Los 15 siguen siendo 15. No esperes a sentirte listo — esta semana.</p>
+      <div class="meta-row">
+        <div class="meta-col anim-up-sm" style="--d:1400ms"><div class="label">Speaker</div><div class="val">Osvaldo Ayala<small>osvaldo@creatorscrate.cc</small></div></div>
+        <div class="meta-col anim-up-sm" style="--d:1500ms"><div class="label">Instagram</div><div class="val">@oa.log<small>instagram.com/oa.log →</small></div></div>
+        <div class="meta-col anim-up-sm" style="--d:1600ms"><div class="label">GitHub</div><div class="val">@overw0rked<small>github.com/overw0rked →</small></div></div>
+        <div class="meta-col anim-up-sm" style="--d:1700ms"><div class="label">Site</div><div class="val">oa.log<small>overw0rked.github.io →</small></div></div>
+      </div>
+    </section>
+
+    <button class="deck-nav-zone prev" id="navPrev" aria-label="Slide anterior"></button>
+    <button class="deck-nav-zone next" id="navNext" aria-label="Siguiente slide"></button>
+
+    <div class="deck-controls">
+      <button class="deck-btn" id="prevBtn" aria-label="Anterior">←</button>
+      <span class="deck-counter" id="counter">01 / 19</span>
+      <button class="deck-btn" id="nextBtn" aria-label="Siguiente">→</button>
+      <button class="deck-btn deck-btn-fs" id="fsBtn" aria-label="Toggle fullscreen">⤢ Fullscreen</button>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const deck = document.getElementById('deck');
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const total = slides.length;
+      const counter = document.getElementById('counter');
+      const progressFill = document.getElementById('progressFill');
+      let current = 0;
+
+      // Hero letter reveal
+      function wrapHeroLetters(el) {
+        if (!el || el.dataset.wrapped === '1') return;
+        const wrapper = document.createElement('div');
+        wrapper.innerHTML = el.innerHTML;
+        let letterIndex = 0;
+        function processNode(node, parentClass) {
+          if (node.nodeType === Node.TEXT_NODE) {
+            const text = node.textContent;
+            const frag = document.createDocumentFragment();
+            for (let i = 0; i < text.length; i++) {
+              const ch = text.charAt(i);
+              if (ch === ' ') { frag.appendChild(document.createTextNode(' ')); continue; }
+              const span = document.createElement('span');
+              span.className = 'anim-letter' + (parentClass ? ' ' + parentClass : '');
+              span.style.setProperty('--d', (60 + letterIndex * 70) + 'ms');
+              span.textContent = ch;
+              frag.appendChild(span);
+              letterIndex++;
+            }
+            node.parentNode.replaceChild(frag, node);
+          } else if (node.nodeType === Node.ELEMENT_NODE) {
+            const cls = node.className;
+            Array.from(node.childNodes).forEach(c => processNode(c, cls));
+          }
+        }
+        Array.from(wrapper.childNodes).forEach(c => processNode(c, ''));
+        el.innerHTML = wrapper.innerHTML;
+        el.dataset.wrapped = '1';
+      }
+      wrapHeroLetters(document.getElementById('coverHero'));
+      wrapHeroLetters(document.getElementById('cierreHero'));
+
+      function pad(n) { return String(n).padStart(2, '0'); }
+
+      function go(i) {
+        if (i < 0 || i >= total || i === current) return;
+        slides[current].classList.remove('active', 'in');
+        current = i;
+        slides[current].classList.add('active');
+        void slides[current].offsetHeight;
+        slides[current].classList.add('in');
+        counter.textContent = pad(current + 1) + ' / ' + pad(total);
+        progressFill.style.width = (((current + 1) / total) * 100) + '%';
+      }
+
+      document.getElementById('prevBtn').addEventListener('click', () => go(current - 1));
+      document.getElementById('nextBtn').addEventListener('click', () => go(current + 1));
+      document.getElementById('navPrev').addEventListener('click', () => go(current - 1));
+      document.getElementById('navNext').addEventListener('click', () => go(current + 1));
+
+      document.querySelectorAll('.roadmap-cell').forEach((c) => {
+        c.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const step = parseInt(c.dataset.step, 10);
+          if (!isNaN(step)) go(step - 1);
+        });
+      });
+
+      // Fullscreen toggle
+      const fsBtn = document.getElementById('fsBtn');
+      function toggleFs() {
+        const el = document.documentElement;
+        if (!document.fullscreenElement) { (el.requestFullscreen || el.webkitRequestFullscreen).call(el); }
+        else { (document.exitFullscreen || document.webkitExitFullscreen).call(document); }
+      }
+      fsBtn.addEventListener('click', toggleFs);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(current + 1); }
+        else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(current - 1); }
+        else if (e.key === 'Home') { e.preventDefault(); go(0); }
+        else if (e.key === 'End') { e.preventDefault(); go(total - 1); }
+        else if (e.key === 'f' || e.key === 'F') { e.preventDefault(); toggleFs(); }
+      });
+
+      progressFill.style.width = ((1 / total) * 100) + '%';
+      deck.focus();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+{{ define "main" }}
+<main class="container-narrow" id="main">
+  <header class="mini-nav">
+    <div class="mini-nav-left">
+      <a href="{{ "/" | relURL }}" class="logo">oa</a>
+      <a href="{{ "/stage/" | relURL }}" class="back-link"><span class="arr">←</span> Stage</a>
+    </div>
+    <button class="mode" id="oaMode" aria-label="Toggle theme"></button>
+  </header>
+
+  <article>
+    <header style="padding:48px 0 40px;border-bottom:1px solid var(--ink-300);margin-bottom:48px;">
+      <div style="display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--accent);font-family:'JetBrains Mono',monospace;margin-bottom:24px;">
+        <span>{{ .Params.kind | default "Keynote" }} · {{ .Params.status | default "past" }} · Stage</span>
+      </div>
+      <h1 style="font-size:clamp(36px,6vw,72px);line-height:1.04;font-weight:500;letter-spacing:-0.028em;color:var(--ink-900);margin:0 0 22px;">{{ .Title | safeHTML }}</h1>
+      {{ with .Description }}<p style="font-size:clamp(16px,2vw,22px);line-height:1.45;color:var(--ink-500);margin:0 0 32px;">{{ . }}</p>{{ end }}
+      <div style="display:flex;flex-wrap:wrap;gap:10px 16px;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--ink-500);font-family:'JetBrains Mono',monospace;">
+        <span><b style="color:var(--ink-900);">{{ dateFormat "02 January 2006" .PublishDate }}</b></span>
+        <span style="color:var(--ink-300);">·</span>
+        <span><b style="color:var(--ink-900);">{{ .Params.event }}</b></span>
+        {{ with .Params.venue }}<span style="color:var(--ink-300);">·</span><span>{{ . }}</span>{{ end }}
+        <span style="color:var(--ink-300);">·</span>
+        <span>{{ .Params.location }}</span>
+        <span style="color:var(--ink-300);">·</span>
+        <span>{{ .Params.duration | default "15 min" }} · {{ .Params.language | default "ES" }}</span>
+      </div>
+    </header>
+
+    {{ with .Params.keynote }}
+    <section style="margin-bottom:64px;">
+      <div style="font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--ink-500);font-family:'JetBrains Mono',monospace;margin-bottom:16px;">// Presentación</div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:16px;flex-wrap:wrap;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-500);margin:0;max-width:44ch;">Navega con ← → · presiona F para fullscreen · clic en los costados del deck también funciona.</p>
+        <a href="{{ . | relURL }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:var(--ink-900);color:var(--paper);border-radius:999px;text-decoration:none;font-size:13px;font-weight:500;">Abrir en pantalla completa <span>↗</span></a>
+      </div>
+      <div style="position:relative;width:100%;aspect-ratio:16/9;background:var(--ink-900);border:0.5px solid var(--ink-900);border-radius:12px;overflow:hidden;">
+        <iframe src="{{ . | relURL }}" title="{{ $.Title }} — Keynote" style="position:absolute;inset:0;width:100%;height:100%;border:0;" loading="lazy" allow="fullscreen" allowfullscreen></iframe>
+      </div>
+    </section>
+    {{ end }}
+
+    <section style="margin-bottom:64px;">
+      <div style="font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--ink-500);font-family:'JetBrains Mono',monospace;margin-bottom:16px;">// Contexto</div>
+      <h2 style="font-size:clamp(24px,3.5vw,40px);line-height:1.1;font-weight:500;letter-spacing:-0.022em;margin:0 0 28px;color:var(--ink-900);">Sobre esta charla.</h2>
+      <div class="prose">{{ .Content }}</div>
+      {{ with .Params.tags }}
+      <div style="margin-top:28px;">
+        <div style="font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--ink-500);font-family:'JetBrains Mono',monospace;margin-bottom:10px;">// Tags</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">{{ range . }}<span style="padding:4px 11px;border:1px solid var(--ink-300);border-radius:999px;font-size:11px;color:var(--ink-500);font-family:'JetBrains Mono',monospace;">{{ . }}</span>{{ end }}</div>
+      </div>
+      {{ end }}
+    </section>
+
+    <footer style="display:flex;justify-content:space-between;padding:32px 0 24px;border-top:1px solid var(--ink-900);margin-top:48px;font-size:11px;color:var(--ink-500);flex-wrap:wrap;gap:16px;font-family:'JetBrains Mono',monospace;">
+      <p>Presentado en <b style="color:var(--ink-900);">{{ .Params.event }}</b> · {{ .Params.location }} · <b style="color:var(--ink-900);">{{ dateFormat "02 January 2006" .PublishDate }}</b></p>
+      <a href="{{ "/stage/" | relURL }}" class="back-link"><span class="arr">←</span> Volver a Stage</a>
+    </footer>
+  </article>
+</main>
+{{ end }}
