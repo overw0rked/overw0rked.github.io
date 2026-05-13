@@ -14,6 +14,6 @@
     <a href="{{ "/stage/" | relURL }}"{{ if eq .Section "stage" }} class="current"{{ end }}>Stage</a>
     <a href="{{ "/blog/" | relURL }}"{{ if eq .Section "blog" }} class="current"{{ end }}>Blog</a>
     <a href="{{ "/#about" | relURL }}">About</a>
-    <a href="mailto:{{ .Site.Params.email }}" class="dim">Contacto</a>
+    <a href="{{ "/contacto/" | relURL }}"{{ if eq .Section "contacto" }} class="current"{{ end }}>Contacto</a>
   </nav>
 </header>
