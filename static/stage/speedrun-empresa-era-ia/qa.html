@@ -13,7 +13,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; background: #F4F4F2; }
+    html, body {
+      margin: 0; padding: 0; background: #F4F4F2;
+      width: 100%; max-width: 100%;
+      overflow-x: hidden; overscroll-behavior-x: none;
+    }
     body {
       font-family: 'Inter', system-ui, sans-serif;
       color: #131313;
@@ -21,7 +25,10 @@
       -moz-osx-font-smoothing: grayscale;
       min-height: 100dvh;
       padding-bottom: env(safe-area-inset-bottom);
+      touch-action: pan-y;
     }
+    .wrap, .preview, .form-block, .q-list, .feed-head { max-width: 100%; }
+    .preview-title, .preview-body, .q-row .text { word-break: break-word; overflow-wrap: anywhere; }
     :root {
       --paper: #F4F4F2;
       --ink-900: #131313;
