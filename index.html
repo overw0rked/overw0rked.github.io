@@ -338,7 +338,7 @@
   </style>
 </head>
 <body>
-  <a href="#main-content" class="skip-link">Saltar al contenido</a>
+  <a href="#main-content" class="skip-link" data-i18n="skip">Saltar al contenido</a>
   <div class="oa-cursor" id="oaCursor" aria-hidden="true"></div>
 
   <main class="container" id="oaSite">
@@ -366,7 +366,7 @@
       <h1 id="oaHero">oa<span class="dot">.</span>log</h1>
       <div class="hero-sub">
         <span class="arrows-down" aria-hidden="true"><span>&darr;</span><span>&darr;</span><span>&darr;</span> &nbsp; SCROLL</span>
-        <span class="tagline">El log de Osvaldo &middot; <b>builds</b> &middot; writes &middot; talks &middot; makes</span>
+        <span class="tagline" data-i18n="tagline">El log de Osvaldo &middot; <b>builds</b> &middot; writes &middot; talks &middot; makes</span>
       </div>
     </section>
 
@@ -390,128 +390,144 @@
     </div>
 
     <div class="sec-toc">
-      <a class="toc-chip" href="#stage"><span class="n">01</span> Stage &middot; ahora</a>
-      <a class="toc-chip" href="#log"><span class="n">02</span> Log completo</a>
-      <a class="toc-chip" href="#about"><span class="n">03</span> About</a>
-      <a class="toc-chip" href="mailto:osvaldo@creatorscrate.cc"><span class="n">04</span> Contacto</a>
+      <a class="toc-chip" href="#stage"><span class="n">01</span> <span data-i18n="toc.stage">Stage &middot; ahora</span></a>
+      <a class="toc-chip" href="#log"><span class="n">02</span> <span data-i18n="toc.log">Log completo</span></a>
+      <a class="toc-chip" href="#about"><span class="n">03</span> <span data-i18n="toc.about">About</span></a>
+      <a class="toc-chip" href="mailto:osvaldo@creatorscrate.cc"><span class="n">04</span> <span data-i18n="toc.contact">Contacto</span></a>
     </div>
 
     <section id="stage">
       <div class="section-head">
-        <h2>Stage</h2>
-        <span class="section-num">Próxima charla en vivo</span>
+        <h2 data-i18n="stage.title">Stage</h2>
+        <span class="section-num" data-i18n="stage.next">Próxima charla en vivo</span>
       </div>
       <article class="stage-card">
         <div class="stage-date" aria-label="14 de mayo de 2026">
           <div class="day">14</div>
           <div class="month-year"><b>MAY</b> 2026</div>
-          <div class="badge"><span>Próxima</span></div>
+          <div class="badge"><span data-i18n="stage.badge">Próxima</span></div>
         </div>
         <div class="stage-content">
-          <div class="tag">Keynote &middot; 15 min &middot; ES</div>
-          <h3>Esto es lo que haría si tuviera que hacer una empresa de nuevo en la era de IA.</h3>
-          <p class="sub">Speedrun por 15 cuellos de botella para arrancar un negocio en México desde cero, en 15 minutos. Validación, fiscalización, marca, CRM, WhatsApp, breakeven, socios, constitución, crédito y contrataciones.</p>
+          <div class="tag" data-i18n="stage.tag">Keynote &middot; 15 min &middot; ES</div>
+          <h3 data-i18n="stage.talk_title">Esto es lo que haría si tuviera que hacer una empresa de nuevo en la era de IA.</h3>
+          <p class="sub" data-i18n="stage.talk_sub">Speedrun por 15 cuellos de botella para arrancar un negocio en México desde cero, en 15 minutos. Validación, fiscalización, marca, CRM, WhatsApp, breakeven, socios, constitución, crédito y contrataciones.</p>
           <div class="meta">
             <span><b>Playas on Tech</b> &middot; Dev Root Lab</span>
             <span>Manzanillo &middot; Colima</span>
           </div>
-          <div class="cta"><a href="speedrun-empresa-era-ia/" target="_blank" rel="noopener">Ver detalles <span class="arr">&rarr;</span></a></div>
+          <div class="cta"><a href="speedrun-empresa-era-ia/" target="_blank" rel="noopener"><span data-i18n="stage.cta">Ver detalles</span> <span class="arr">&rarr;</span></a></div>
         </div>
       </article>
     </section>
 
     <section id="log">
       <div class="section-head">
-        <h2>Log</h2>
-        <span class="section-num" id="secNum">09 entradas</span>
+        <h2 data-i18n="log.title">Log</h2>
+        <span class="section-num" id="secNum" data-i18n="log.count">11 entradas</span>
       </div>
 
       <div class="toolbar">
-        <span class="toolbar-label">Filtrar: <b>recientes</b></span>
+        <span class="toolbar-label" data-i18n="log.filter">Filtrar: <b>recientes</b></span>
         <div class="chips" id="filterChips" role="tablist">
-          <button class="chip active" data-kind="all" role="tab">Todo <span class="ct">09</span></button>
+          <button class="chip active" data-kind="all" role="tab"><span data-i18n="log.filter_all">Todo</span> <span class="ct">11</span></button>
           <button class="chip" data-kind="build" role="tab">build <span class="ct">03</span></button>
           <button class="chip" data-kind="write" role="tab">write <span class="ct">03</span></button>
-          <button class="chip" data-kind="talk" role="tab">talk <span class="ct">01</span></button>
+          <button class="chip" data-kind="talk" role="tab">talk <span class="ct">03</span></button>
           <button class="chip" data-kind="make" role="tab">make <span class="ct">02</span></button>
         </div>
-        <span class="visible-count" id="visibleCount">09 / 09</span>
+        <span class="visible-count" id="visibleCount">11 / 11</span>
       </div>
 
       <table class="log-table">
         <thead>
-          <tr><th>lp.</th><th>nombre</th><th>tipo</th><th>categoría</th><th>fecha</th><th aria-hidden="true"></th></tr>
+          <tr><th data-i18n="th.no">lp.</th><th data-i18n="th.name">nombre</th><th data-i18n="th.type">tipo</th><th data-i18n="th.cat">categoría</th><th data-i18n="th.date">fecha</th><th aria-hidden="true"></th></tr>
         </thead>
         <tbody id="logBody">
-          <tr class="now" data-kind="talk">
+          <tr data-kind="talk">
             <td class="idx">01</td>
-            <td class="name">Speedrun: empresa de nuevo en la era de la IA<span class="now-marker" title="now" aria-label="entrada actual"></span></td>
+            <td class="name"><a href="mvps-48h-con-claude/" style="color:inherit;text-decoration:none;"><span data-i18n="e.mvps.n">MVPs en 48h con Claude</span></a></td>
             <td class="kind"><span class="kind-tag">talk</span></td>
-            <td class="cat">Keynote &middot; Playas on Tech</td>
+            <td class="cat" data-i18n="e.mvps.c">Workshop · upcoming</td>
+            <td class="date">2026.06.10</td>
+            <td class="arr">&rarr;</td>
+          </tr>
+          <tr class="now" data-kind="talk">
+            <td class="idx">02</td>
+            <td class="name"><a href="speedrun-empresa-era-ia/" style="color:inherit;text-decoration:none;"><span data-i18n="e.speedrun.n">Speedrun: empresa de nuevo en la era de la IA</span></a><span class="now-marker" title="now" aria-label="entrada actual"></span></td>
+            <td class="kind"><span class="kind-tag">talk</span></td>
+            <td class="cat" data-i18n="e.speedrun.c">Keynote · Playas on Tech</td>
             <td class="date">2026.05.14</td>
             <td class="arr">&rarr;</td>
           </tr>
           <tr data-kind="build">
-            <td class="idx">02</td>
-            <td class="name">instagram-content skill v2</td>
+            <td class="idx">03</td>
+            <td class="name" data-i18n="e.ig.n">instagram-content skill v2</td>
             <td class="kind"><span class="kind-tag">build</span></td>
-            <td class="cat">Claude Code skill</td>
+            <td class="cat" data-i18n="e.ig.c">Claude Code skill</td>
             <td class="date">2026.05.08</td>
             <td class="arr">&rarr;</td>
           </tr>
           <tr data-kind="write">
-            <td class="idx">03</td>
-            <td class="name">Cuello de botella #7: el follow-up es el producto</td>
+            <td class="idx">04</td>
+            <td class="name" data-i18n="e.b7.n">Cuello de botella #7: el follow-up es el producto</td>
             <td class="kind"><span class="kind-tag">write</span></td>
-            <td class="cat">Ensayo &middot; B2B</td>
+            <td class="cat" data-i18n="e.b7.c">Ensayo · B2B</td>
             <td class="date">2026.05.03</td>
             <td class="arr">&rarr;</td>
           </tr>
           <tr data-kind="make">
-            <td class="idx">04</td>
-            <td class="name">Carrusel: PFAE vs SAPI en 7 slides</td>
+            <td class="idx">05</td>
+            <td class="name" data-i18n="e.pfae.n">Carrusel: PFAE vs SAPI en 7 slides</td>
             <td class="kind"><span class="kind-tag">make</span></td>
-            <td class="cat">Instagram &middot; fiscal</td>
+            <td class="cat" data-i18n="e.pfae.c">Instagram · fiscal</td>
             <td class="date">2026.04.28</td>
             <td class="arr">&rarr;</td>
           </tr>
+          <tr data-kind="talk">
+            <td class="idx">06</td>
+            <td class="name"><a href="como-construir-agente-whatsapp/" style="color:inherit;text-decoration:none;"><span data-i18n="e.kapso_talk.n">Cómo construir un agente de WhatsApp con memoria</span></a></td>
+            <td class="kind"><span class="kind-tag">talk</span></td>
+            <td class="cat" data-i18n="e.kapso_talk.c">Talk · Founders MX Live</td>
+            <td class="date">2026.04.22</td>
+            <td class="arr">&rarr;</td>
+          </tr>
           <tr data-kind="build">
-            <td class="idx">05</td>
-            <td class="name">kapso &middot; agente WhatsApp con memoria</td>
+            <td class="idx">07</td>
+            <td class="name" data-i18n="e.kapso.n">kapso · agente WhatsApp con memoria</td>
             <td class="kind"><span class="kind-tag">build</span></td>
-            <td class="cat">Proyecto &middot; WA API</td>
+            <td class="cat" data-i18n="e.kapso.c">Proyecto · WA API</td>
             <td class="date">2026.04.19</td>
             <td class="arr">&rarr;</td>
           </tr>
           <tr data-kind="write">
-            <td class="idx">06</td>
-            <td class="name">Por qué oa.log existe</td>
+            <td class="idx">08</td>
+            <td class="name" data-i18n="e.manifest.n">Por qué oa.log existe</td>
             <td class="kind"><span class="kind-tag">write</span></td>
-            <td class="cat">Manifiesto</td>
+            <td class="cat" data-i18n="e.manifest.c">Manifiesto</td>
             <td class="date">2026.04.10</td>
             <td class="arr">&rarr;</td>
           </tr>
           <tr data-kind="write">
-            <td class="idx">07</td>
-            <td class="name">Disciplina del minimalismo editorial</td>
+            <td class="idx">09</td>
+            <td class="name" data-i18n="e.minimal.n">Disciplina del minimalismo editorial</td>
             <td class="kind"><span class="kind-tag">write</span></td>
-            <td class="cat">Notas de diseño</td>
+            <td class="cat" data-i18n="e.minimal.c">Notas de diseño</td>
             <td class="date">2026.03.25</td>
             <td class="arr">&rarr;</td>
           </tr>
           <tr data-kind="make">
-            <td class="idx">08</td>
-            <td class="name">Reel: 30 segundos sobre validación de ideas</td>
+            <td class="idx">10</td>
+            <td class="name" data-i18n="e.reel.n">Reel: 30 segundos sobre validación de ideas</td>
             <td class="kind"><span class="kind-tag">make</span></td>
-            <td class="cat">Instagram &middot; reel</td>
+            <td class="cat" data-i18n="e.reel.c">Instagram · reel</td>
             <td class="date">2026.03.12</td>
             <td class="arr">&rarr;</td>
           </tr>
           <tr data-kind="build">
-            <td class="idx">09</td>
-            <td class="name">matchbox: sitio editorial de Creators Crate</td>
+            <td class="idx">11</td>
+            <td class="name" data-i18n="e.matchbox.n">matchbox: sitio editorial de Creators Crate</td>
             <td class="kind"><span class="kind-tag">build</span></td>
-            <td class="cat">Next.js &middot; producción</td>
+            <td class="cat" data-i18n="e.matchbox.c">Next.js · producción</td>
             <td class="date">2026.02.28</td>
             <td class="arr">&rarr;</td>
           </tr>
@@ -521,20 +537,20 @@
 
     <section id="about">
       <div class="section-head">
-        <h2>About</h2>
-        <span class="section-num">Speaker &middot; @oa.log</span>
+        <h2 data-i18n="about.title">About</h2>
+        <span class="section-num" data-i18n="about.speaker">Speaker &middot; @oa.log</span>
       </div>
       <div class="about-body">
         <div class="about-visual" aria-label="Tracks">
           <div class="about-kind"><div class="count">12</div><div class="label">builds</div></div>
           <div class="about-kind"><div class="count">08</div><div class="label">writes</div></div>
-          <div class="about-kind active"><div class="count">04</div><div class="label">talks</div></div>
+          <div class="about-kind active"><div class="count">03</div><div class="label">talks</div></div>
           <div class="about-kind"><div class="count">24</div><div class="label">makes</div></div>
         </div>
         <div class="about-content">
           <h3>Osvaldo Ayala.</h3>
           <p class="role">Builder &middot; Founder, Creators Crate &middot; CDMX</p>
-          <p class="bio">Construye herramientas y agentes <b>IA</b> para emprendedores y creadores en México. Apila identidades: <b>founder</b>, <b>dev</b>, <b>speaker</b>, <b>creator</b>. Obsesionado con quitarle fricción al verbo <b>emprender</b> en México — y con que un LLM pueda leer tu empresa el día que la abres.</p>
+          <p class="bio" data-i18n="about.bio">Construye herramientas y agentes <b>IA</b> para emprendedores y creadores en México. Apila identidades: <b>founder</b>, <b>dev</b>, <b>speaker</b>, <b>creator</b>. Obsesionado con quitarle fricción al verbo <b>emprender</b> en México — y con que un LLM pueda leer tu empresa el día que la abres.</p>
         </div>
       </div>
 
@@ -564,7 +580,7 @@
 
     <footer class="foot">
       <span>oa&middot;log <span class="stat">MMXXVI</span></span>
-      <span>Sistema vivo &middot; <span class="stat" id="footStat">9 entries</span> &middot; <span class="stat" id="footUptime">&middot;</span></span>
+      <span><span data-i18n="footer.living">Sistema vivo</span> &middot; <span class="stat" id="footStat">11 entries</span> &middot; <span class="stat" id="footUptime">&middot;</span></span>
     </footer>
   </main>
 
@@ -653,11 +669,82 @@
     heart.addEventListener('click', toggleLike);
     heart.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleLike(); } });
 
-    // Language toggle
+    // i18n dictionary + toggle
+    const i18n = {
+      es: {
+        'tagline': 'El log de Osvaldo · <b>builds</b> · writes · talks · makes',
+        'toc.stage': 'Stage · ahora', 'toc.log': 'Log completo', 'toc.about': 'About', 'toc.contact': 'Contacto',
+        'stage.title': 'Stage', 'stage.next': 'Próxima charla en vivo', 'stage.badge': 'Próxima',
+        'stage.tag': 'Keynote · 15 min · ES',
+        'stage.talk_title': 'Esto es lo que haría si tuviera que hacer una empresa de nuevo en la era de IA.',
+        'stage.talk_sub': 'Speedrun por 15 cuellos de botella para arrancar un negocio en México desde cero, en 15 minutos. Validación, fiscalización, marca, CRM, WhatsApp, breakeven, socios, constitución, crédito y contrataciones.',
+        'stage.cta': 'Ver detalles',
+        'log.title': 'Log', 'log.count': '11 entradas',
+        'log.filter': 'Filtrar: <b>recientes</b>', 'log.filter_all': 'Todo',
+        'th.no': 'lp.', 'th.name': 'nombre', 'th.type': 'tipo', 'th.cat': 'categoría', 'th.date': 'fecha',
+        'e.speedrun.n': 'Speedrun: empresa de nuevo en la era de la IA',
+        'e.speedrun.c': 'Keynote · Playas on Tech',
+        'e.mvps.n': 'MVPs en 48h con Claude',
+        'e.mvps.c': 'Workshop · upcoming',
+        'e.kapso_talk.n': 'Cómo construir un agente de WhatsApp con memoria',
+        'e.kapso_talk.c': 'Talk · Founders MX Live',
+        'e.ig.n': 'instagram-content skill v2', 'e.ig.c': 'Claude Code skill',
+        'e.b7.n': 'Cuello de botella #7: el follow-up es el producto', 'e.b7.c': 'Ensayo · B2B',
+        'e.pfae.n': 'Carrusel: PFAE vs SAPI en 7 slides', 'e.pfae.c': 'Instagram · fiscal',
+        'e.kapso.n': 'kapso · agente WhatsApp con memoria', 'e.kapso.c': 'Proyecto · WA API',
+        'e.manifest.n': 'Por qué oa.log existe', 'e.manifest.c': 'Manifiesto',
+        'e.minimal.n': 'Disciplina del minimalismo editorial', 'e.minimal.c': 'Notas de diseño',
+        'e.reel.n': 'Reel: 30 segundos sobre validación de ideas', 'e.reel.c': 'Instagram · reel',
+        'e.matchbox.n': 'matchbox: sitio editorial de Creators Crate', 'e.matchbox.c': 'Next.js · producción',
+        'about.title': 'About', 'about.speaker': 'Speaker · @oa.log',
+        'about.bio': 'Construye herramientas y agentes <b>IA</b> para emprendedores y creadores en México. Apila identidades: <b>founder</b>, <b>dev</b>, <b>speaker</b>, <b>creator</b>. Obsesionado con quitarle fricción al verbo <b>emprender</b> en México — y con que un LLM pueda leer tu empresa el día que la abres.',
+        'footer.living': 'Sistema vivo', 'skip': 'Saltar al contenido',
+      },
+      en: {
+        'tagline': "Osvaldo's log · <b>builds</b> · writes · talks · makes",
+        'toc.stage': 'Stage · now', 'toc.log': 'Full log', 'toc.about': 'About', 'toc.contact': 'Contact',
+        'stage.title': 'Stage', 'stage.next': 'Next live talk', 'stage.badge': 'Upcoming',
+        'stage.tag': 'Keynote · 15 min · ES',
+        'stage.talk_title': "This is what I'd do if I had to build a company from scratch in the AI era.",
+        'stage.talk_sub': 'Speedrun through 15 bottlenecks to start a business in Mexico from scratch, in 15 minutes. Validation, fiscal, brand, CRM, WhatsApp, breakeven, partners, incorporation, credit and hiring.',
+        'stage.cta': 'See details',
+        'log.title': 'Log', 'log.count': '11 entries',
+        'log.filter': 'Filter: <b>recent</b>', 'log.filter_all': 'All',
+        'th.no': 'no.', 'th.name': 'name', 'th.type': 'type', 'th.cat': 'category', 'th.date': 'date',
+        'e.speedrun.n': 'Speedrun: company from scratch in the AI era',
+        'e.speedrun.c': 'Keynote · Playas on Tech',
+        'e.mvps.n': 'MVPs in 48h with Claude',
+        'e.mvps.c': 'Workshop · upcoming',
+        'e.kapso_talk.n': 'How to build a WhatsApp agent with memory',
+        'e.kapso_talk.c': 'Talk · Founders MX Live',
+        'e.ig.n': 'instagram-content skill v2', 'e.ig.c': 'Claude Code skill',
+        'e.b7.n': 'Bottleneck #7: follow-up is the product', 'e.b7.c': 'Essay · B2B',
+        'e.pfae.n': 'Carousel: PFAE vs SAPI in 7 slides', 'e.pfae.c': 'Instagram · fiscal',
+        'e.kapso.n': 'kapso · WhatsApp agent with memory', 'e.kapso.c': 'Project · WA API',
+        'e.manifest.n': 'Why oa.log exists', 'e.manifest.c': 'Manifesto',
+        'e.minimal.n': 'Editorial minimalism discipline', 'e.minimal.c': 'Design notes',
+        'e.reel.n': 'Reel: 30 seconds on idea validation', 'e.reel.c': 'Instagram · reel',
+        'e.matchbox.n': 'matchbox: editorial site for Creators Crate', 'e.matchbox.c': 'Next.js · production',
+        'about.title': 'About', 'about.speaker': 'Speaker · @oa.log',
+        'about.bio': 'Builds tools and <b>AI</b> agents for entrepreneurs and creators in Mexico. Stacks identities: <b>founder</b>, <b>dev</b>, <b>speaker</b>, <b>creator</b>. Obsessed with reducing friction in the verb <b>to build</b> in Mexico — and with making sure an LLM can read your company the day you open it.',
+        'footer.living': 'Living system', 'skip': 'Skip to content',
+      }
+    };
+    function setLang(lang) {
+      document.documentElement.lang = lang === 'en' ? 'en' : 'es-MX';
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (i18n[lang] && i18n[lang][key] != null) el.innerHTML = i18n[lang][key];
+      });
+      if (lang === 'en') { langActive.textContent = 'EN'; langOther.textContent = 'ES'; }
+      else { langActive.textContent = 'ES'; langOther.textContent = 'EN'; }
+      localStorage.setItem('oa-lang', lang);
+    }
     langWrap.addEventListener('click', () => {
-      const a = langActive.textContent, b = langOther.textContent;
-      langActive.textContent = b; langOther.textContent = a;
+      const cur = document.documentElement.lang.startsWith('es') ? 'es' : 'en';
+      setLang(cur === 'es' ? 'en' : 'es');
     });
+    setLang(localStorage.getItem('oa-lang') || 'es');
 
     // Live clock
     function tick() {

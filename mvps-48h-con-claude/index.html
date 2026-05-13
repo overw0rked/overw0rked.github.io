@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F4F4F2">
+  <title>MVPs en 48h con Claude · oa.log</title>
+  <meta name="description" content="Workshop práctico: de idea a MVP funcional en 48 horas usando Claude como copiloto. Upcoming, junio 2026.">
+  <link rel="canonical" href="https://overw0rked.github.io/mvps-48h-con-claude/">
+  <meta property="og:title" content="MVPs en 48h con Claude · oa.log">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="es_MX">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23F4F4F2'/%3E%3Ctext x='8' y='12' font-family='Inter,sans-serif' font-size='10' font-weight='500' text-anchor='middle' fill='%23131313'%3Eoa%3C/text%3E%3Ccircle cx='13' cy='3' r='1.5' fill='%23FF202B'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { margin: 0; font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--paper); color: var(--ink-900); transition: background 280ms ease, color 280ms ease; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden; }
+    :root { --paper: #F4F4F2; --ink-900: #131313; --ink-700: #1A1A1A; --ink-500: #474747; --ink-300: #BCBCBC; --ink-100: #E5E3DD; --accent: #FF202B; --container-pad: 32px; --tr-fast: 160ms; --ease-out: cubic-bezier(0.2, 0.85, 0.2, 1); }
+    [data-theme="dark"] { --paper: #0E0E0E; --ink-900: #F4F4F2; --ink-700: #BCBCBC; --ink-500: #888888; --ink-300: #474747; --ink-100: #1A1A1A; }
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 var(--container-pad); position: relative; }
+    @media (max-width: 1024px) { :root { --container-pad: 24px; } }
+    @media (max-width: 640px) { :root { --container-pad: 18px; } }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(to right, currentColor 1px, transparent 1px); background-size: 111px 100%; background-position: 50% 0; color: var(--ink-900); opacity: 0.025; pointer-events: none; z-index: 0; }
+    @media (max-width: 640px) { body::before { display: none; } }
+    main { position: relative; z-index: 1; }
+    h1, h2, h3 { color: var(--ink-900); }
+
+    .talk-top { padding: 22px 0 14px; display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; font-size: 12px; color: var(--ink-500); }
+    .talk-top-left { display: inline-flex; align-items: center; gap: 14px; }
+    .logo { width: 28px; height: 28px; border: 1.5px solid var(--ink-900); border-radius: 3px; display: inline-flex; align-items: center; justify-content: center; font-weight: 500; font-size: 12px; color: var(--ink-900); transition: transform 360ms var(--ease-out), border-color 240ms ease; cursor: pointer; user-select: none; text-decoration: none; flex-shrink: 0; }
+    .logo:hover { transform: rotate(-90deg); border-color: var(--accent); }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--ink-500); text-decoration: none; transition: color var(--tr-fast) ease; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; }
+    .back-link:hover { color: var(--accent); }
+    .back-link .arr { transition: transform 200ms ease; display: inline-block; }
+    .back-link:hover .arr { transform: translateX(-3px); }
+    .mode { width: 18px; height: 18px; border-radius: 50%; background: linear-gradient(90deg, var(--ink-900) 50%, var(--paper) 50%); border: 1px solid var(--ink-900); cursor: pointer; transition: transform 280ms var(--ease-out); padding: 0; flex-shrink: 0; }
+    .mode:hover { transform: rotate(180deg); }
+
+    .talk-header { padding: 48px 0 40px; border-bottom: 1px solid var(--ink-300); margin-bottom: 48px; }
+    .talk-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--accent); font-family: 'JetBrains Mono', monospace; margin-bottom: 24px; }
+    .talk-tag::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; position: relative; animation: pulse 1.9s ease-out infinite; }
+    @keyframes pulse { 0% { transform: scale(1); opacity: 0.9; } 100% { transform: scale(2.5); opacity: 0; } }
+    .talk-title { font-size: clamp(32px, 5.4vw, 68px); line-height: 1.04; font-weight: 500; letter-spacing: -0.028em; color: var(--ink-900); margin: 0 0 24px; max-width: 22ch; }
+    .talk-title em { font-style: normal; color: var(--accent); }
+    .talk-subtitle { font-size: clamp(15px, 1.8vw, 20px); line-height: 1.45; color: var(--ink-500); margin: 0 0 32px; max-width: 56ch; }
+    .talk-meta { display: flex; flex-wrap: wrap; gap: 10px 16px; font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--ink-500); font-family: 'JetBrains Mono', monospace; }
+    .talk-meta b { color: var(--ink-900); font-weight: 500; }
+    .talk-meta-sep { color: var(--ink-300); opacity: 0.7; }
+
+    .talk-section { margin-bottom: 64px; }
+    .talk-section-label { font-size: 11px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--ink-500); font-family: 'JetBrains Mono', monospace; margin-bottom: 16px; }
+    .talk-section-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 28px; gap: 12px; flex-wrap: wrap; }
+    .talk-section-heading { font-size: clamp(24px, 3.5vw, 40px); line-height: 1.1; font-weight: 500; letter-spacing: -0.022em; margin: 0; }
+    .talk-section-num { font-size: 11px; color: var(--ink-300); letter-spacing: 1.4px; font-variant-numeric: tabular-nums; font-family: 'JetBrains Mono', monospace; }
+
+    .talk-abstract p { font-size: clamp(15px, 1.8vw, 18px); line-height: 1.65; color: var(--ink-700); margin: 0 0 22px; max-width: 68ch; }
+    [data-theme="dark"] .talk-abstract p { color: var(--ink-900); opacity: 0.9; }
+    .talk-abstract ul { padding-left: 20px; max-width: 68ch; }
+    .talk-abstract li { font-size: 16px; line-height: 1.65; color: var(--ink-700); margin-bottom: 10px; }
+    [data-theme="dark"] .talk-abstract li { color: var(--ink-900); opacity: 0.9; }
+    .talk-abstract li b { color: var(--ink-900); }
+
+    .agenda-grid { display: grid; grid-template-columns: 80px 1fr; gap: 0; border-top: 1px solid var(--ink-300); }
+    .agenda-row { display: contents; }
+    .agenda-row > * { padding: 16px 14px; border-bottom: 1px solid var(--ink-300); }
+    .agenda-time { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-500); font-variant-numeric: tabular-nums; }
+    .agenda-block { font-size: 14px; line-height: 1.5; color: var(--ink-900); }
+    .agenda-block b { color: var(--ink-900); }
+    .agenda-block small { display: block; font-size: 12px; color: var(--ink-500); margin-top: 4px; }
+
+    .talk-cta-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-top: 28px; }
+    .talk-cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; background: var(--ink-900); color: var(--paper); border-radius: 999px; text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.5px; transition: transform 180ms ease, background 180ms ease; }
+    .talk-cta-btn:hover { transform: translateY(-1px); background: var(--accent); }
+    .talk-cta-note { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-500); }
+
+    .talk-speakers { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    .talk-speaker { padding: 28px; background: var(--ink-100); border: 0.5px solid var(--ink-300); border-radius: 14px; position: relative; }
+    .talk-speaker::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 56px; background: var(--accent); }
+    .talk-speaker-avatar { width: 56px; height: 56px; border-radius: 999px; background: var(--paper); border: 1px solid var(--ink-900); display: inline-flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 500; letter-spacing: 0.5px; color: var(--ink-900); margin-bottom: 18px; }
+    .talk-speaker-name { font-size: 28px; font-weight: 500; line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 6px; }
+    .talk-speaker-role { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--ink-500); margin: 0 0 14px; }
+    .talk-speaker-bio { font-size: 14px; line-height: 1.55; color: var(--ink-700); margin: 0 0 18px; }
+    [data-theme="dark"] .talk-speaker-bio { color: var(--ink-900); opacity: 0.9; }
+    .talk-speaker-socials { display: flex; gap: 10px 16px; flex-wrap: wrap; padding-top: 14px; border-top: 0.5px solid var(--ink-300); }
+    .talk-speaker-socials a { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-500); text-decoration: none; transition: color var(--tr-fast) ease; }
+    .talk-speaker-socials a:hover { color: var(--accent); }
+    .talk-speaker-socials a .lbl { color: var(--ink-300); text-transform: uppercase; letter-spacing: 1.2px; }
+
+    .talk-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .talk-tag-chip { padding: 4px 11px; border: 1px solid var(--ink-300); border-radius: 999px; font-size: 11px; color: var(--ink-500); font-family: 'JetBrains Mono', monospace; }
+
+    .talk-footer { display: flex; justify-content: space-between; padding: 28px 0 24px; border-top: 1px solid var(--ink-900); margin-top: 48px; font-size: 11px; color: var(--ink-500); flex-wrap: wrap; gap: 16px; font-family: 'JetBrains Mono', monospace; }
+    .talk-footer b { color: var(--ink-900); font-weight: 500; }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header class="talk-top">
+      <div class="talk-top-left">
+        <a href="/" class="logo">oa</a>
+        <a href="/" class="back-link"><span class="arr">←</span> Volver a oa.log</a>
+      </div>
+      <button class="mode" id="oaMode" aria-label="Toggle theme"></button>
+    </header>
+
+    <article>
+      <header class="talk-header">
+        <div class="talk-tag"><span>Workshop · Upcoming · Stage</span></div>
+        <h1 class="talk-title">MVPs en <em>48 horas</em> con Claude.</h1>
+        <p class="talk-subtitle">Workshop práctico: de idea a MVP funcional en 48 horas usando Claude como copiloto técnico. Para founders que quieren validar sin esperar a contratar dev.</p>
+        <div class="talk-meta">
+          <span><b>10 de junio de 2026</b></span>
+          <span class="talk-meta-sep">·</span>
+          <span><b>Builder Week MX</b></span>
+          <span class="talk-meta-sep">·</span>
+          <span>Ciudad de México</span>
+          <span class="talk-meta-sep">·</span>
+          <span>48h workshop · ES</span>
+          <span class="talk-meta-sep">·</span>
+          <span><b>Osvaldo Ayala</b></span>
+        </div>
+      </header>
+
+      <section class="talk-section">
+        <div class="talk-section-label">// Contexto</div>
+        <div class="talk-section-head">
+          <h2 class="talk-section-heading">Sobre este workshop.</h2>
+          <span class="talk-section-num">01 / 04</span>
+        </div>
+        <div class="talk-abstract">
+          <p>El gap entre "tengo una idea" y "tengo algo que puedo enseñar a un cliente" históricamente eran semanas. Con Claude como copiloto técnico, son <b>48 horas</b> — si sabes qué construir, qué evitar, y cómo pedirlo.</p>
+          <p>Workshop intensivo de fin de semana donde cada participante sale con un MVP corriendo en producción. No es teórico: traes una idea, te vas con landing + backend + base de datos + auth + deploy.</p>
+          <ul>
+            <li><b>Día 1:</b> validar la idea con 10 conversaciones + diseñar la arquitectura mínima con Claude.</li>
+            <li><b>Día 2:</b> construir, deployar a Vercel, conseguir tu primer usuario beta antes de irte.</li>
+            <li><b>Stack base:</b> Next.js · Supabase · Stripe · Vercel — todo prompteado contra Claude.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="talk-section">
+        <div class="talk-section-label">// Agenda</div>
+        <div class="talk-section-head">
+          <h2 class="talk-section-heading">Las 48 horas.</h2>
+          <span class="talk-section-num">02 / 04</span>
+        </div>
+        <div class="agenda-grid">
+          <div class="agenda-row">
+            <div class="agenda-time">SÁB 09:00</div>
+            <div class="agenda-block"><b>Kickoff · idea pitch</b><small>Cada participante presenta su idea en 60 segundos. Feedback colectivo.</small></div>
+          </div>
+          <div class="agenda-row">
+            <div class="agenda-time">SÁB 10:00</div>
+            <div class="agenda-block"><b>Validation sprint</b><small>10 conversaciones de 15 min con clientes potenciales. Antes de tocar código.</small></div>
+          </div>
+          <div class="agenda-row">
+            <div class="agenda-time">SÁB 14:00</div>
+            <div class="agenda-block"><b>Arquitectura con Claude</b><small>Prompts que diseñan tu schema, tus endpoints, tu data model en 30 min.</small></div>
+          </div>
+          <div class="agenda-row">
+            <div class="agenda-time">SÁB 18:00</div>
+            <div class="agenda-block"><b>Build sprint #1</b><small>Backend + base de datos + primer endpoint funcionando.</small></div>
+          </div>
+          <div class="agenda-row">
+            <div class="agenda-time">DOM 09:00</div>
+            <div class="agenda-block"><b>Build sprint #2</b><small>Frontend, auth, payments. Stripe en sandbox antes del lunch.</small></div>
+          </div>
+          <div class="agenda-row">
+            <div class="agenda-time">DOM 15:00</div>
+            <div class="agenda-block"><b>Deploy + primer usuario</b><small>Vercel push. Compartes link. Buscas tu primer beta antes de las 6pm.</small></div>
+          </div>
+          <div class="agenda-row">
+            <div class="agenda-time">DOM 18:00</div>
+            <div class="agenda-block"><b>Demo & retrospectiva</b><small>Cada participante demuestra. Compartimos qué funcionó, qué no.</small></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="talk-section">
+        <div class="talk-section-label">// Registro</div>
+        <div class="talk-section-head">
+          <h2 class="talk-section-heading">Apartar lugar.</h2>
+          <span class="talk-section-num">03 / 04</span>
+        </div>
+        <div class="talk-abstract">
+          <p>Cupos limitados a <b>15 founders</b>. Necesitas: laptop, una idea que quieras validar, y disponibilidad completa el fin de semana del 10-11 de junio. Costo y registro por confirmar.</p>
+          <div class="talk-cta-row">
+            <a class="talk-cta-btn" href="mailto:osvaldo@creatorscrate.cc?subject=MVPs%2048h%20Workshop%20-%20Interest">Quiero apartar lugar →</a>
+            <span class="talk-cta-note">o avísame por @oa.log en Instagram</span>
+          </div>
+        </div>
+        <div style="margin-top: 28px;">
+          <div class="talk-section-label" style="margin-bottom: 10px;">// Tags</div>
+          <div class="talk-tags">
+            <span class="talk-tag-chip">MVPs</span>
+            <span class="talk-tag-chip">Claude</span>
+            <span class="talk-tag-chip">workshop</span>
+            <span class="talk-tag-chip">Next.js</span>
+            <span class="talk-tag-chip">Supabase</span>
+            <span class="talk-tag-chip">vibe coding</span>
+            <span class="talk-tag-chip">CDMX</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="talk-section">
+        <div class="talk-section-label">// Oradores</div>
+        <div class="talk-section-head">
+          <h2 class="talk-section-heading">Quién lo da.</h2>
+          <span class="talk-section-num">04 / 04</span>
+        </div>
+        <div class="talk-speakers">
+          <article class="talk-speaker">
+            <div class="talk-speaker-avatar">OA</div>
+            <h3 class="talk-speaker-name">Osvaldo Ayala</h3>
+            <p class="talk-speaker-role">Builder · oa.log · Founder, Creators Crate</p>
+            <p class="talk-speaker-bio">Founder de Creators Crate. Construye herramientas y agentes IA para emprendedores. Ha shipeado MVPs de fin de semana toda su carrera — éste workshop es la versión sistematizada.</p>
+            <div class="talk-speaker-socials">
+              <a href="https://instagram.com/oa.log" target="_blank" rel="noopener"><span class="lbl">IG</span> @oa.log</a>
+              <a href="https://github.com/overw0rked" target="_blank" rel="noopener"><span class="lbl">GH</span> @overw0rked</a>
+              <a href="https://www.linkedin.com/in/osvaldoayala/" target="_blank" rel="noopener"><span class="lbl">LI</span> osvaldoayala</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <footer class="talk-footer">
+        <p>Upcoming · <b>Builder Week MX</b> · CDMX · <b>10-11 junio 2026</b></p>
+        <a href="/" class="back-link">← Volver a oa.log</a>
+      </footer>
+    </article>
+  </main>
+  <script>
+    (function() {
+      const mode = document.getElementById('oaMode');
+      const stored = localStorage.getItem('oa-theme');
+      if (stored === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      mode.addEventListener('click', () => {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        if (isDark) { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('oa-theme', 'light'); }
+        else { document.documentElement.setAttribute('data-theme', 'dark'); localStorage.setItem('oa-theme', 'dark'); }
+      });
+    })();
+  </script>
+</body>
+</html>
