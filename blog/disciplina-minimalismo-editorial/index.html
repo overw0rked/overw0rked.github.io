@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F4F4F2">
+  <title>Disciplina del minimalismo editorial · oa.log</title>
+  <meta name="description" content="Notas de diseño sobre cómo construí el sistema visual de oa.log. Por qué la restricción es la feature.">
+  <link rel="canonical" href="https://overw0rked.github.io/blog/disciplina-minimalismo-editorial/">
+  <meta property="og:title" content="Disciplina del minimalismo editorial · oa.log">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="es_MX">
+  <meta property="article:published_time" content="2026-03-25">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23F4F4F2'/%3E%3Ctext x='8' y='12' font-family='Inter,sans-serif' font-size='10' font-weight='500' text-anchor='middle' fill='%23131313'%3Eoa%3C/text%3E%3Ccircle cx='13' cy='3' r='1.5' fill='%23FF202B'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { margin: 0; font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--paper); color: var(--ink-900); transition: background 280ms ease, color 280ms ease; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden; }
+    :root { --paper: #F4F4F2; --ink-900: #131313; --ink-700: #1A1A1A; --ink-500: #474747; --ink-300: #BCBCBC; --ink-100: #E5E3DD; --accent: #FF202B; --container-pad: 32px; --tr-fast: 160ms; --ease-out: cubic-bezier(0.2, 0.85, 0.2, 1); }
+    [data-theme="dark"] { --paper: #0E0E0E; --ink-900: #F4F4F2; --ink-700: #BCBCBC; --ink-500: #888888; --ink-300: #474747; --ink-100: #1A1A1A; }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 var(--container-pad); position: relative; }
+    @media (max-width: 1024px) { :root { --container-pad: 24px; } }
+    @media (max-width: 640px) { :root { --container-pad: 18px; } }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(to right, currentColor 1px, transparent 1px); background-size: 111px 100%; background-position: 50% 0; color: var(--ink-900); opacity: 0.02; pointer-events: none; z-index: 0; }
+    @media (max-width: 640px) { body::before { display: none; } }
+    main { position: relative; z-index: 1; }
+    h1, h2, h3 { color: var(--ink-900); }
+    .top { padding: 22px 0 14px; display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; font-size: 12px; color: var(--ink-500); }
+    .top-left { display: inline-flex; align-items: center; gap: 14px; }
+    .logo { width: 28px; height: 28px; border: 1.5px solid var(--ink-900); border-radius: 3px; display: inline-flex; align-items: center; justify-content: center; font-weight: 500; font-size: 12px; color: var(--ink-900); transition: transform 360ms var(--ease-out), border-color 240ms ease; cursor: pointer; user-select: none; text-decoration: none; flex-shrink: 0; }
+    .logo:hover { transform: rotate(-90deg); border-color: var(--accent); }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--ink-500); text-decoration: none; transition: color var(--tr-fast) ease; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; }
+    .back-link:hover { color: var(--accent); }
+    .back-link .arr { transition: transform 200ms ease; display: inline-block; }
+    .back-link:hover .arr { transform: translateX(-3px); }
+    .mode { width: 18px; height: 18px; border-radius: 50%; background: linear-gradient(90deg, var(--ink-900) 50%, var(--paper) 50%); border: 1px solid var(--ink-900); cursor: pointer; transition: transform 280ms var(--ease-out); padding: 0; flex-shrink: 0; }
+    .mode:hover { transform: rotate(180deg); }
+    article header { padding: clamp(28px, 5vw, 56px) 0 clamp(20px, 3vw, 36px); border-bottom: 1px solid var(--ink-300); margin-bottom: clamp(32px, 4.6vw, 48px); }
+    .post-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--ink-500); font-family: 'JetBrains Mono', monospace; margin-bottom: 24px; }
+    .post-tag .num { color: var(--accent); }
+    .post-h1 { font-size: clamp(36px, 6vw, 72px); line-height: 1.04; font-weight: 500; letter-spacing: -0.028em; color: var(--ink-900); margin: 0 0 22px; }
+    .post-h1 em { font-style: normal; color: var(--accent); }
+    .post-sub { font-size: clamp(16px, 2vw, 22px); line-height: 1.45; color: var(--ink-500); margin: 0 0 28px; font-weight: 400; }
+    .post-meta { display: flex; gap: 12px 18px; font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--ink-500); font-family: 'JetBrains Mono', monospace; flex-wrap: wrap; }
+    .post-meta b { color: var(--ink-900); font-weight: 500; }
+    .post-meta-sep { color: var(--ink-300); opacity: 0.7; }
+    .prose { font-size: clamp(16px, 1.8vw, 19px); line-height: 1.65; color: var(--ink-700); }
+    [data-theme="dark"] .prose { color: var(--ink-900); opacity: 0.92; }
+    .prose p { margin: 0 0 22px; }
+    .prose p.lede { font-size: 1.1em; line-height: 1.55; color: var(--ink-900); }
+    .prose h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.15; font-weight: 500; letter-spacing: -0.02em; color: var(--ink-900); margin: 48px 0 16px; }
+    .prose h2 .num { font-family: 'JetBrains Mono', monospace; font-size: 0.6em; color: var(--ink-300); margin-right: 12px; vertical-align: 0.05em; font-weight: 400; }
+    .prose b, .prose strong { color: var(--ink-900); font-weight: 500; }
+    .prose em { color: var(--ink-900); font-style: italic; }
+    .prose ul, .prose ol { padding-left: 24px; margin: 0 0 22px; }
+    .prose li { margin-bottom: 8px; }
+    .prose blockquote { margin: 28px 0; padding: 18px 22px; border-left: 3px solid var(--accent); background: var(--ink-100); font-size: 1.05em; line-height: 1.5; color: var(--ink-900); font-style: italic; }
+    .prose code { background: var(--ink-100); padding: 2px 7px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.9em; color: var(--ink-900); }
+    .prose hr { border: none; border-top: 1px solid var(--ink-300); margin: 36px 0; }
+    .rules-table { width: 100%; border-collapse: collapse; margin: 28px 0; font-size: 0.95em; }
+    .rules-table th { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--ink-300); text-align: left; padding: 10px 14px 10px 0; border-bottom: 1px solid var(--ink-300); font-weight: 400; }
+    .rules-table td { padding: 14px 14px 14px 0; border-bottom: 1px solid var(--ink-300); color: var(--ink-700); }
+    [data-theme="dark"] .rules-table td { color: var(--ink-900); opacity: 0.9; }
+    .rules-table td:first-child { color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 11px; width: 28%; vertical-align: top; padding-top: 14px; }
+    .swatch-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 24px 0; }
+    .swatch { display: flex; flex-direction: column; gap: 4px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink-500); letter-spacing: 0.5px; }
+    .swatch-chip { width: 70px; height: 70px; border: 0.5px solid var(--ink-300); display: flex; align-items: flex-end; padding: 6px; }
+    .swatch-name { color: var(--ink-900); text-transform: uppercase; }
+    .post-footer { display: flex; justify-content: space-between; padding: 32px 0 24px; border-top: 1px solid var(--ink-900); margin-top: 48px; font-size: 11px; color: var(--ink-500); flex-wrap: wrap; gap: 16px; font-family: 'JetBrains Mono', monospace; }
+    .post-footer b { color: var(--ink-900); font-weight: 500; }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header class="top">
+      <div class="top-left">
+        <a href="/" class="logo">oa</a>
+        <a href="/blog/" class="back-link"><span class="arr">←</span> Blog</a>
+      </div>
+      <button class="mode" id="oaMode" aria-label="Toggle theme"></button>
+    </header>
+
+    <article>
+      <header>
+        <div class="post-tag"><span class="num">03</span> Notas de diseño</div>
+        <h1 class="post-h1">Disciplina del <em>minimalismo</em> editorial.</h1>
+        <p class="post-sub">Notas sobre cómo construí el sistema visual de oa.log. Por qué la restricción es la feature, no la limitación.</p>
+        <div class="post-meta">
+          <span><b>25 marzo 2026</b></span>
+          <span class="post-meta-sep">·</span>
+          <span>6 min de lectura</span>
+          <span class="post-meta-sep">·</span>
+          <span><b>Osvaldo Ayala</b></span>
+        </div>
+      </header>
+
+      <div class="prose">
+        <p class="lede">La mayoría de los sitios personales están sobre-diseñados. No mal diseñados — <em>demasiado</em> diseñados. Tres tipografías, cinco colores, gradientes para "darle vida", hover states sorpresivos, animaciones de scroll. Y todo eso compite con el contenido en lugar de servirle.</p>
+
+        <p>Cuando empecé oa.log me di una sola instrucción: <strong>quita hasta que duela</strong>. Lo que quede es el sistema.</p>
+
+        <h2><span class="num">01</span> La referencia: editorial polaco</h2>
+
+        <p>El punto de partida visual no fue Apple ni Stripe ni los sitios indie de Vercel. Fue una pieza específica: <em>Studio Zarach Portfolio Website</em> de Patryk Zarach (Polonia, 2022). Lo que me atrapó fue una sola decisión: tipografía neo-grotesca de un solo peso dominante, un solo rojo de acento, y todo numerado como manual técnico.</p>
+
+        <p>La tradición polaca de diseño editorial — de los carteles de los 60s hasta el branding contemporáneo — tiene una virtud rara: confianza en la composición pura. No necesita decorar porque <em>el layout es el diseño</em>.</p>
+
+        <blockquote>El minimalismo editorial no es ausencia. Es elección violenta de qué mostrar y qué no.</blockquote>
+
+        <h2><span class="num">02</span> Las reglas que me di</h2>
+
+        <table class="rules-table">
+          <thead><tr><th>Regla</th><th>Detalle</th></tr></thead>
+          <tbody>
+            <tr><td>Una tipografía</td><td>Inter (en producción) como stand-in de PP Neue Montreal. Cero serif. Cero display. Una sola voz tipográfica para todo.</td></tr>
+            <tr><td>Dos pesos máx.</td><td>Regular (400) y Medium (500). Nunca bold 700. La fuente regular ya tiene presencia — el bold es ruido.</td></tr>
+            <tr><td>Monocromo + un acento</td><td>Negro, blancos cálidos, grises intermedios. Un solo rojo (#FF202B) que aparece máximo 1-2 veces por pantalla.</td></tr>
+            <tr><td>Todo numerado</td><td>Secciones, items, listas. El número es parte del diseño, no decoración. Aplica orden visual.</td></tr>
+            <tr><td>Hairlines</td><td>Líneas de 0.5px o 1px. Nunca bordes gruesos. Los divisores estructuran sin gritar.</td></tr>
+            <tr><td>Cero gradientes</td><td>Cero drop shadows. Cero glows. Cero blur. La identidad es <em>plana</em>.</td></tr>
+            <tr><td>Mono para data</td><td>JetBrains Mono para meta, fechas, métricas, claves. Sans para todo lo humano.</td></tr>
+          </tbody>
+        </table>
+
+        <h2><span class="num">03</span> El color es una decisión política</h2>
+
+        <p>El rojo de oa.log no apareció por gusto estético. Apareció por economía de jerarquía. Cuando todo es monocromo, una sola cosa roja captura el ojo inmediatamente — y eso me da control de <em>dónde</em> debe ir el ojo del usuario.</p>
+
+        <div class="swatch-row">
+          <div class="swatch"><div class="swatch-chip" style="background:#131313;color:#F4F4F2;">#131313</div><div class="swatch-name">INK 900</div><div>texto</div></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#474747;color:#F4F4F2;">#474747</div><div class="swatch-name">INK 500</div><div>dim</div></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#BCBCBC;color:#131313;">#BCBCBC</div><div class="swatch-name">INK 300</div><div>divisor</div></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#F4F4F2;border-color:#131313;color:#131313;">#F4F4F2</div><div class="swatch-name">PAPER</div><div>fondo</div></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#FF202B;color:#F4F4F2;">#FF202B</div><div class="swatch-name">ACCENT</div><div>acento</div></div>
+        </div>
+
+        <p>El rojo aparece en exactamente cuatro lugares en oa.log:</p>
+        <ul>
+          <li>El punto en el wordmark — el <strong>mark</strong>.</li>
+          <li>El indicador "ahora" en el log — la fila viva.</li>
+          <li>El focus ring — accesibilidad.</li>
+          <li>El día del Stage card — la fecha de la próxima charla.</li>
+        </ul>
+
+        <p>Y nada más. Si quisiera usarlo en otro lado, primero tendría que negociar con uno de esos cuatro: "¿pierde su poder si añado un quinto?". La respuesta casi siempre es sí.</p>
+
+        <h2><span class="num">04</span> El numeral como sistema</h2>
+
+        <p>En oa.log todo viene con número. Las secciones (<code>01 Stage · ahora</code>, <code>02 Log completo</code>). Los items de la tabla del log (<code>01</code>, <code>02</code>, ..., <code>11</code>). Los pasos de cualquier ensayo numerados (<code>01</code>, <code>02</code>). Las charlas.</p>
+
+        <p>¿Por qué? Tres razones:</p>
+
+        <ol>
+          <li><strong>Wayfinding.</strong> Saber dónde estás en una lista de 15 items reduce ansiedad — sabes cuánto falta.</li>
+          <li><strong>Authority.</strong> Lo numerado se siente curado, intencional. Las listas sin número se sienten dispersas.</li>
+          <li><strong>Visual rhythm.</strong> Los números monoespaciados al borde aportan una columna vertical implícita que estructura sin necesitar marco.</li>
+        </ol>
+
+        <h2><span class="num">05</span> El costo de la restricción</h2>
+
+        <p>Toda restricción tiene un costo. Lo que <em>no</em> puedo hacer en oa.log:</p>
+
+        <ul>
+          <li>Highlights de color cuando un párrafo lo amerita — solo el rojo, y solo en sus 4 usos sagrados.</li>
+          <li>Tipografía expresiva (cursive, condensed, slab) para momentos especiales.</li>
+          <li>Ilustraciones decorativas. Solo diagramas funcionales si la idea lo pide.</li>
+          <li>Backgrounds tonales para diferenciar secciones. Solo hairlines.</li>
+        </ul>
+
+        <p>El costo es real. A veces escribo un párrafo que claramente quiere ser un callout amarillo, y tengo que pensar cómo lograr el mismo énfasis con un border-left rojo o una blockquote con fondo gris. Es más trabajo. Por eso la disciplina existe — para que la decisión no se tome cada vez.</p>
+
+        <h2><span class="num">06</span> El payoff</h2>
+
+        <p>Después de tres meses con este sistema:</p>
+
+        <ul>
+          <li><strong>Publico más.</strong> No hay decisión de diseño para una nueva entrada — todo encaja por default.</li>
+          <li><strong>Compone solo.</strong> Cualquier nueva sección se ve "del sitio" automáticamente. Cero pesado pasaba con cinco colores.</li>
+          <li><strong>Edad bien.</strong> No tiene tendencias 2025 que se ven cringe en 2027. Es atemporal porque es restringido.</li>
+        </ul>
+
+        <hr>
+
+        <p>El minimalismo editorial no es un estilo. Es una declaración: <strong>"lo que importa es lo que escribo, no cómo lo decoré"</strong>. Para un sitio personal cuyo punto es mostrar pensamiento, no había otra opción honesta.</p>
+
+        <p>El próximo founder armando su sitio: empieza por las restricciones, no por las funcionalidades. ¿Qué te niegas a hacer? Esa lista define tu identidad visual más que cualquier moodboard.</p>
+      </div>
+
+      <footer class="post-footer">
+        <p>Publicado <b>25 marzo 2026</b> · Próximo: por qué oa.log existe</p>
+        <a href="/blog/" class="back-link"><span class="arr">←</span> Volver al blog</a>
+      </footer>
+    </article>
+  </main>
+
+  <script>
+    (function() {
+      const mode = document.getElementById('oaMode');
+      const stored = localStorage.getItem('oa-theme');
+      if (stored === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      mode.addEventListener('click', () => {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        if (isDark) { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('oa-theme', 'light'); }
+        else { document.documentElement.setAttribute('data-theme', 'dark'); localStorage.setItem('oa-theme', 'dark'); }
+      });
+    })();
+  </script>
+</body>
+</html>

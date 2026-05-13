@@ -356,8 +356,9 @@
       <nav class="menu">
         <a href="#log" class="current">Log</a>
         <a href="#stage">Stage</a>
+        <a href="/blog/">Blog</a>
         <a href="#about">About</a>
-        <a href="mailto:osvaldo@creatorscrate.cc" class="dim">Contacto</a>
+        <a href="mailto:osvaldo@creatorscrate.cc" class="dim" data-i18n="nav.contact">Contacto</a>
       </nav>
     </header>
 
@@ -392,8 +393,9 @@
     <div class="sec-toc">
       <a class="toc-chip" href="#stage"><span class="n">01</span> <span data-i18n="toc.stage">Stage &middot; ahora</span></a>
       <a class="toc-chip" href="#log"><span class="n">02</span> <span data-i18n="toc.log">Log completo</span></a>
-      <a class="toc-chip" href="#about"><span class="n">03</span> <span data-i18n="toc.about">About</span></a>
-      <a class="toc-chip" href="mailto:osvaldo@creatorscrate.cc"><span class="n">04</span> <span data-i18n="toc.contact">Contacto</span></a>
+      <a class="toc-chip" href="/blog/"><span class="n">03</span> <span data-i18n="toc.blog">Blog &middot; ensayos</span></a>
+      <a class="toc-chip" href="#about"><span class="n">04</span> <span data-i18n="toc.about">About</span></a>
+      <a class="toc-chip" href="mailto:osvaldo@creatorscrate.cc"><span class="n">05</span> <span data-i18n="toc.contact">Contacto</span></a>
     </div>
 
     <section id="stage">
@@ -469,7 +471,7 @@
           </tr>
           <tr data-kind="write">
             <td class="idx">04</td>
-            <td class="name" data-i18n="e.b7.n">Cuello de botella #7: el follow-up es el producto</td>
+            <td class="name"><a href="blog/cuello-7-follow-up-es-el-producto/" style="color:inherit;text-decoration:none;"><span data-i18n="e.b7.n">Cuello de botella #7: el follow-up es el producto</span></a></td>
             <td class="kind"><span class="kind-tag">write</span></td>
             <td class="cat" data-i18n="e.b7.c">Ensayo · B2B</td>
             <td class="date">2026.05.03</td>
@@ -501,7 +503,7 @@
           </tr>
           <tr data-kind="write">
             <td class="idx">08</td>
-            <td class="name" data-i18n="e.manifest.n">Por qué oa.log existe</td>
+            <td class="name"><a href="blog/por-que-oalog-existe/" style="color:inherit;text-decoration:none;"><span data-i18n="e.manifest.n">Por qué oa.log existe</span></a></td>
             <td class="kind"><span class="kind-tag">write</span></td>
             <td class="cat" data-i18n="e.manifest.c">Manifiesto</td>
             <td class="date">2026.04.10</td>
@@ -509,7 +511,7 @@
           </tr>
           <tr data-kind="write">
             <td class="idx">09</td>
-            <td class="name" data-i18n="e.minimal.n">Disciplina del minimalismo editorial</td>
+            <td class="name"><a href="blog/disciplina-minimalismo-editorial/" style="color:inherit;text-decoration:none;"><span data-i18n="e.minimal.n">Disciplina del minimalismo editorial</span></a></td>
             <td class="kind"><span class="kind-tag">write</span></td>
             <td class="cat" data-i18n="e.minimal.c">Notas de diseño</td>
             <td class="date">2026.03.25</td>
@@ -673,7 +675,7 @@
     const i18n = {
       es: {
         'tagline': 'El log de Osvaldo · <b>builds</b> · writes · talks · makes',
-        'toc.stage': 'Stage · ahora', 'toc.log': 'Log completo', 'toc.about': 'About', 'toc.contact': 'Contacto',
+        'toc.stage': 'Stage · ahora', 'toc.log': 'Log completo', 'toc.blog': 'Blog · ensayos', 'toc.about': 'About', 'toc.contact': 'Contacto', 'nav.contact': 'Contacto',
         'stage.title': 'Stage', 'stage.next': 'Próxima charla en vivo', 'stage.badge': 'Próxima',
         'stage.tag': 'Keynote · 15 min · ES',
         'stage.talk_title': 'Esto es lo que haría si tuviera que hacer una empresa de nuevo en la era de IA.',
@@ -702,7 +704,7 @@
       },
       en: {
         'tagline': "Osvaldo's log · <b>builds</b> · writes · talks · makes",
-        'toc.stage': 'Stage · now', 'toc.log': 'Full log', 'toc.about': 'About', 'toc.contact': 'Contact',
+        'toc.stage': 'Stage · now', 'toc.log': 'Full log', 'toc.blog': 'Blog · essays', 'toc.about': 'About', 'toc.contact': 'Contact', 'nav.contact': 'Contact',
         'stage.title': 'Stage', 'stage.next': 'Next live talk', 'stage.badge': 'Upcoming',
         'stage.tag': 'Keynote · 15 min · ES',
         'stage.talk_title': "This is what I'd do if I had to build a company from scratch in the AI era.",

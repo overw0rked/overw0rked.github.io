@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F4F4F2">
+  <title>Blog · oa.log</title>
+  <meta name="description" content="Ensayos, notas y manifiestos de Osvaldo Ayala — emprendimiento en México, herramientas IA, diseño editorial.">
+  <link rel="canonical" href="https://overw0rked.github.io/blog/">
+  <meta property="og:title" content="Blog · oa.log">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_MX">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23F4F4F2'/%3E%3Ctext x='8' y='12' font-family='Inter,sans-serif' font-size='10' font-weight='500' text-anchor='middle' fill='%23131313'%3Eoa%3C/text%3E%3Ccircle cx='13' cy='3' r='1.5' fill='%23FF202B'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Inter:ital,wght@1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { margin: 0; font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--paper); color: var(--ink-900); transition: background 280ms ease, color 280ms ease; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden; }
+    :root { --paper: #F4F4F2; --ink-900: #131313; --ink-700: #1A1A1A; --ink-500: #474747; --ink-300: #BCBCBC; --ink-100: #E5E3DD; --accent: #FF202B; --container-pad: 32px; --tr-fast: 160ms; --ease-out: cubic-bezier(0.2, 0.85, 0.2, 1); }
+    [data-theme="dark"] { --paper: #0E0E0E; --ink-900: #F4F4F2; --ink-700: #BCBCBC; --ink-500: #888888; --ink-300: #474747; --ink-100: #1A1A1A; }
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 var(--container-pad); position: relative; }
+    @media (max-width: 1024px) { :root { --container-pad: 24px; } }
+    @media (max-width: 640px) { :root { --container-pad: 18px; } }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(to right, currentColor 1px, transparent 1px); background-size: 111px 100%; background-position: 50% 0; color: var(--ink-900); opacity: 0.025; pointer-events: none; z-index: 0; }
+    @media (max-width: 640px) { body::before { display: none; } }
+    main { position: relative; z-index: 1; }
+    h1, h2, h3 { color: var(--ink-900); }
+
+    .top { padding: 22px 0 14px; display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; font-size: 12px; color: var(--ink-500); }
+    .top-left { display: inline-flex; align-items: center; gap: 14px; }
+    .logo { width: 28px; height: 28px; border: 1.5px solid var(--ink-900); border-radius: 3px; display: inline-flex; align-items: center; justify-content: center; font-weight: 500; font-size: 12px; color: var(--ink-900); transition: transform 360ms var(--ease-out), border-color 240ms ease; cursor: pointer; user-select: none; text-decoration: none; flex-shrink: 0; }
+    .logo:hover { transform: rotate(-90deg); border-color: var(--accent); }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--ink-500); text-decoration: none; transition: color var(--tr-fast) ease; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; }
+    .back-link:hover { color: var(--accent); }
+    .back-link .arr { transition: transform 200ms ease; display: inline-block; }
+    .back-link:hover .arr { transform: translateX(-3px); }
+    .mode { width: 18px; height: 18px; border-radius: 50%; background: linear-gradient(90deg, var(--ink-900) 50%, var(--paper) 50%); border: 1px solid var(--ink-900); cursor: pointer; transition: transform 280ms var(--ease-out); padding: 0; flex-shrink: 0; }
+    .mode:hover { transform: rotate(180deg); }
+
+    .blog-hero { padding: clamp(36px, 6vw, 72px) 0 clamp(24px, 4vw, 48px); border-bottom: 1px solid var(--ink-300); margin-bottom: 48px; }
+    .blog-tag { font-size: 11px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--ink-500); font-family: 'JetBrains Mono', monospace; margin-bottom: 24px; }
+    .blog-title { font-size: clamp(72px, 14vw, 200px); line-height: 0.9; font-weight: 500; letter-spacing: -0.045em; margin: 0 0 24px; color: var(--ink-900); }
+    .blog-title .red { color: var(--accent); }
+    .blog-lede { font-size: clamp(16px, 2vw, 22px); line-height: 1.5; color: var(--ink-500); margin: 0; max-width: 56ch; }
+
+    .blog-meta-row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink-500); }
+    .blog-meta-row b { color: var(--ink-900); font-weight: 500; }
+
+    .post-list { display: flex; flex-direction: column; }
+    .post-card { display: grid; grid-template-columns: 80px 1fr auto; gap: clamp(16px, 2.4vw, 32px); padding: clamp(24px, 3.6vw, 36px) 0; border-bottom: 1px solid var(--ink-300); position: relative; text-decoration: none; color: inherit; transition: background 200ms ease; }
+    .post-card::before { content: ''; position: absolute; top: clamp(24px, 3.6vw, 36px); left: -8px; width: 0; height: 60px; background: var(--accent); transition: width 220ms ease; }
+    .post-card:hover { background: rgba(19,19,19,0.025); }
+    [data-theme="dark"] .post-card:hover { background: rgba(244,244,242,0.03); }
+    .post-card:hover::before { width: 3px; }
+    .post-idx { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-300); font-variant-numeric: tabular-nums; padding-top: 6px; letter-spacing: 0.5px; }
+    .post-card:hover .post-idx { color: var(--accent); }
+    .post-body { min-width: 0; }
+    .post-eyebrow { font-size: 10px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--ink-500); font-family: 'JetBrains Mono', monospace; margin-bottom: 10px; display: flex; gap: 14px; flex-wrap: wrap; }
+    .post-eyebrow .date { color: var(--ink-900); }
+    .post-eyebrow .read { color: var(--ink-500); }
+    .post-eyebrow .read::before { content: '· '; color: var(--ink-300); }
+    .post-h { font-family: 'Inter', sans-serif; font-size: clamp(24px, 3.6vw, 44px); line-height: 1.06; font-weight: 500; letter-spacing: -0.022em; margin: 0 0 12px; color: var(--ink-900); max-width: 24ch; transition: color 200ms ease; }
+    .post-card:hover .post-h { color: var(--accent); }
+    .post-lede { font-size: clamp(14px, 1.6vw, 17px); line-height: 1.55; color: var(--ink-500); margin: 0 0 14px; max-width: 56ch; }
+    .post-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
+    .post-tag { padding: 3px 10px; border: 1px solid var(--ink-300); border-radius: 999px; font-size: 10px; color: var(--ink-500); font-family: 'JetBrains Mono', monospace; }
+    .post-arr { font-size: 18px; color: var(--ink-900); padding-top: 4px; transition: transform 220ms var(--ease-out), color 200ms ease; }
+    .post-card:hover .post-arr { transform: translateX(4px); color: var(--accent); }
+
+    @media (max-width: 640px) {
+      .post-card { grid-template-columns: 1fr; gap: 8px; padding-bottom: 28px; }
+      .post-idx { font-size: 11px; padding-top: 0; }
+      .post-arr { display: none; }
+    }
+
+    .blog-footer { display: flex; justify-content: space-between; padding: 32px 0 24px; border-top: 1px solid var(--ink-900); margin-top: 48px; font-size: 11px; color: var(--ink-500); flex-wrap: wrap; gap: 16px; font-family: 'JetBrains Mono', monospace; }
+    .blog-footer b { color: var(--ink-900); font-weight: 500; }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header class="top">
+      <div class="top-left">
+        <a href="/" class="logo">oa</a>
+        <a href="/" class="back-link"><span class="arr">←</span> Volver a oa.log</a>
+      </div>
+      <button class="mode" id="oaMode" aria-label="Toggle theme"></button>
+    </header>
+
+    <section class="blog-hero">
+      <div class="blog-tag">// Blog · writes</div>
+      <h1 class="blog-title">Blog<span class="red">.</span></h1>
+      <p class="blog-lede">Ensayos, notas y manifiestos sobre emprender en México, construir con IA, y diseñar como si importara.</p>
+    </section>
+
+    <div class="blog-meta-row">
+      <span><b>03 posts</b> · ordenados por fecha</span>
+      <span>Actualizado 2026.05.03</span>
+    </div>
+
+    <div class="post-list">
+      <a class="post-card" href="cuello-7-follow-up-es-el-producto/">
+        <div class="post-idx">01</div>
+        <div class="post-body">
+          <div class="post-eyebrow"><span class="date">2026.05.03</span><span class="read">4 min de lectura</span></div>
+          <h2 class="post-h">Cuello de botella #7: el follow-up es el producto.</h2>
+          <p class="post-lede">En B2B, lo que vendes no es el producto. Lo que vendes es la cadencia con la que apareces. Por qué los founders pierden el 80% de sus leads en el limbo entre cotización y cierre, y cómo arreglarlo.</p>
+          <div class="post-tags">
+            <span class="post-tag">B2B</span>
+            <span class="post-tag">CRM</span>
+            <span class="post-tag">founders</span>
+            <span class="post-tag">ventas</span>
+          </div>
+        </div>
+        <div class="post-arr">→</div>
+      </a>
+
+      <a class="post-card" href="por-que-oalog-existe/">
+        <div class="post-idx">02</div>
+        <div class="post-body">
+          <div class="post-eyebrow"><span class="date">2026.04.10</span><span class="read">5 min de lectura</span></div>
+          <h2 class="post-h">Por qué oa.log existe.</h2>
+          <p class="post-lede">Manifiesto. Por qué construí este sitio en lugar de seguir esparciendo identidad entre cinco plataformas que no se hablan. El costo de la fragmentación y la decisión de unificarlo todo bajo un solo log.</p>
+          <div class="post-tags">
+            <span class="post-tag">manifesto</span>
+            <span class="post-tag">personal brand</span>
+            <span class="post-tag">meta</span>
+          </div>
+        </div>
+        <div class="post-arr">→</div>
+      </a>
+
+      <a class="post-card" href="disciplina-minimalismo-editorial/">
+        <div class="post-idx">03</div>
+        <div class="post-body">
+          <div class="post-eyebrow"><span class="date">2026.03.25</span><span class="read">6 min de lectura</span></div>
+          <h2 class="post-h">Disciplina del minimalismo editorial.</h2>
+          <p class="post-lede">Notas de diseño sobre cómo construí el sistema visual de oa.log y por qué la restricción es la feature. Monocromo + un rojo, una tipografía, todo numerado. La economía de decisiones de un design system honesto.</p>
+          <div class="post-tags">
+            <span class="post-tag">design</span>
+            <span class="post-tag">typography</span>
+            <span class="post-tag">editorial</span>
+            <span class="post-tag">design system</span>
+          </div>
+        </div>
+        <div class="post-arr">→</div>
+      </a>
+    </div>
+
+    <footer class="blog-footer">
+      <p>oa·log <b>MMXXVI</b> · blog actualizado quincenalmente</p>
+      <a href="/" class="back-link"><span class="arr">←</span> Volver a oa.log</a>
+    </footer>
+  </main>
+
+  <script>
+    (function() {
+      const mode = document.getElementById('oaMode');
+      const stored = localStorage.getItem('oa-theme');
+      if (stored === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      mode.addEventListener('click', () => {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        if (isDark) { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('oa-theme', 'light'); }
+        else { document.documentElement.setAttribute('data-theme', 'dark'); localStorage.setItem('oa-theme', 'dark'); }
+      });
+    })();
+  </script>
+</body>
+</html>

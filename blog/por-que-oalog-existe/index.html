@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F4F4F2">
+  <title>Por qué oa.log existe · oa.log</title>
+  <meta name="description" content="Manifiesto. Por qué construí este sitio en lugar de seguir esparciendo identidad entre cinco plataformas que no se hablan.">
+  <link rel="canonical" href="https://overw0rked.github.io/blog/por-que-oalog-existe/">
+  <meta property="og:title" content="Por qué oa.log existe · oa.log">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="es_MX">
+  <meta property="article:published_time" content="2026-04-10">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23F4F4F2'/%3E%3Ctext x='8' y='12' font-family='Inter,sans-serif' font-size='10' font-weight='500' text-anchor='middle' fill='%23131313'%3Eoa%3C/text%3E%3Ccircle cx='13' cy='3' r='1.5' fill='%23FF202B'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { margin: 0; font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--paper); color: var(--ink-900); transition: background 280ms ease, color 280ms ease; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden; }
+    :root { --paper: #F4F4F2; --ink-900: #131313; --ink-700: #1A1A1A; --ink-500: #474747; --ink-300: #BCBCBC; --ink-100: #E5E3DD; --accent: #FF202B; --container-pad: 32px; --tr-fast: 160ms; --ease-out: cubic-bezier(0.2, 0.85, 0.2, 1); }
+    [data-theme="dark"] { --paper: #0E0E0E; --ink-900: #F4F4F2; --ink-700: #BCBCBC; --ink-500: #888888; --ink-300: #474747; --ink-100: #1A1A1A; }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 var(--container-pad); position: relative; }
+    @media (max-width: 1024px) { :root { --container-pad: 24px; } }
+    @media (max-width: 640px) { :root { --container-pad: 18px; } }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(to right, currentColor 1px, transparent 1px); background-size: 111px 100%; background-position: 50% 0; color: var(--ink-900); opacity: 0.02; pointer-events: none; z-index: 0; }
+    @media (max-width: 640px) { body::before { display: none; } }
+    main { position: relative; z-index: 1; }
+    h1, h2, h3 { color: var(--ink-900); }
+    .top { padding: 22px 0 14px; display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; font-size: 12px; color: var(--ink-500); }
+    .top-left { display: inline-flex; align-items: center; gap: 14px; }
+    .logo { width: 28px; height: 28px; border: 1.5px solid var(--ink-900); border-radius: 3px; display: inline-flex; align-items: center; justify-content: center; font-weight: 500; font-size: 12px; color: var(--ink-900); transition: transform 360ms var(--ease-out), border-color 240ms ease; cursor: pointer; user-select: none; text-decoration: none; flex-shrink: 0; }
+    .logo:hover { transform: rotate(-90deg); border-color: var(--accent); }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--ink-500); text-decoration: none; transition: color var(--tr-fast) ease; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; }
+    .back-link:hover { color: var(--accent); }
+    .back-link .arr { transition: transform 200ms ease; display: inline-block; }
+    .back-link:hover .arr { transform: translateX(-3px); }
+    .mode { width: 18px; height: 18px; border-radius: 50%; background: linear-gradient(90deg, var(--ink-900) 50%, var(--paper) 50%); border: 1px solid var(--ink-900); cursor: pointer; transition: transform 280ms var(--ease-out); padding: 0; flex-shrink: 0; }
+    .mode:hover { transform: rotate(180deg); }
+    article header { padding: clamp(28px, 5vw, 56px) 0 clamp(20px, 3vw, 36px); border-bottom: 1px solid var(--ink-300); margin-bottom: clamp(32px, 4.6vw, 48px); }
+    .post-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--ink-500); font-family: 'JetBrains Mono', monospace; margin-bottom: 24px; }
+    .post-tag .num { color: var(--accent); }
+    .post-h1 { font-size: clamp(36px, 6vw, 72px); line-height: 1.04; font-weight: 500; letter-spacing: -0.028em; color: var(--ink-900); margin: 0 0 22px; }
+    .post-h1 em { font-style: normal; color: var(--accent); }
+    .post-sub { font-size: clamp(16px, 2vw, 22px); line-height: 1.45; color: var(--ink-500); margin: 0 0 28px; font-weight: 400; }
+    .post-meta { display: flex; gap: 12px 18px; font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--ink-500); font-family: 'JetBrains Mono', monospace; flex-wrap: wrap; }
+    .post-meta b { color: var(--ink-900); font-weight: 500; }
+    .post-meta-sep { color: var(--ink-300); opacity: 0.7; }
+    .prose { font-size: clamp(16px, 1.8vw, 19px); line-height: 1.65; color: var(--ink-700); }
+    [data-theme="dark"] .prose { color: var(--ink-900); opacity: 0.92; }
+    .prose p { margin: 0 0 22px; }
+    .prose p.lede { font-size: 1.1em; line-height: 1.55; color: var(--ink-900); }
+    .prose h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.15; font-weight: 500; letter-spacing: -0.02em; color: var(--ink-900); margin: 48px 0 16px; }
+    .prose h2 .num { font-family: 'JetBrains Mono', monospace; font-size: 0.6em; color: var(--ink-300); margin-right: 12px; vertical-align: 0.05em; font-weight: 400; }
+    .prose b, .prose strong { color: var(--ink-900); font-weight: 500; }
+    .prose em { color: var(--ink-900); font-style: italic; }
+    .prose ul, .prose ol { padding-left: 24px; margin: 0 0 22px; }
+    .prose li { margin-bottom: 8px; }
+    .prose blockquote { margin: 28px 0; padding: 18px 22px; border-left: 3px solid var(--accent); background: var(--ink-100); font-size: 1.05em; line-height: 1.5; color: var(--ink-900); font-style: italic; }
+    .prose code { background: var(--ink-100); padding: 2px 7px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.9em; color: var(--ink-900); }
+    .prose hr { border: none; border-top: 1px solid var(--ink-300); margin: 36px 0; }
+    .frag-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 28px 0; }
+    @media (max-width: 480px) { .frag-grid { grid-template-columns: 1fr; } }
+    .frag { border: 0.5px solid var(--ink-300); padding: 16px 18px; }
+    .frag-lbl { font-size: 10px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--ink-500); font-family: 'JetBrains Mono', monospace; margin-bottom: 6px; }
+    .frag-val { font-size: 14px; color: var(--ink-900); line-height: 1.5; }
+    .frag-val b { color: var(--ink-900); }
+    .post-footer { display: flex; justify-content: space-between; padding: 32px 0 24px; border-top: 1px solid var(--ink-900); margin-top: 48px; font-size: 11px; color: var(--ink-500); flex-wrap: wrap; gap: 16px; font-family: 'JetBrains Mono', monospace; }
+    .post-footer b { color: var(--ink-900); font-weight: 500; }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header class="top">
+      <div class="top-left">
+        <a href="/" class="logo">oa</a>
+        <a href="/blog/" class="back-link"><span class="arr">←</span> Blog</a>
+      </div>
+      <button class="mode" id="oaMode" aria-label="Toggle theme"></button>
+    </header>
+
+    <article>
+      <header>
+        <div class="post-tag"><span class="num">02</span> Manifiesto</div>
+        <h1 class="post-h1">Por qué <em>oa.log</em> existe.</h1>
+        <p class="post-sub">Por qué construí este sitio en lugar de seguir esparciendo identidad entre cinco plataformas que no se hablan entre sí.</p>
+        <div class="post-meta">
+          <span><b>10 abril 2026</b></span>
+          <span class="post-meta-sep">·</span>
+          <span>5 min de lectura</span>
+          <span class="post-meta-sep">·</span>
+          <span><b>Osvaldo Ayala</b></span>
+        </div>
+      </header>
+
+      <div class="prose">
+        <p class="lede">Hasta hace tres meses mi presencia digital estaba esparcida en cinco lugares que no se hablaban entre sí. Y cada uno mostraba un Osvaldo distinto, incompleto, y sin contexto.</p>
+
+        <p>Mi código vivía en <strong>GitHub</strong>, donde un visitante veía un dev solitario con repos sin README. Mis posts más serios vivían en un <strong>Medium abandonado</strong>. Las charlas en <strong>YouTube</strong>, con thumbnails de hace años. El contenido visual en <strong>Instagram</strong>, donde la fuente de mi identidad pública debería estar — pero sin contexto técnico, sin link a nada que cierre el loop. Y una <strong>landing de Creators Crate</strong> que mostraba el founder pero no la persona.</p>
+
+        <p>Cinco identidades parciales. Ningún hilo que las conectara.</p>
+
+        <h2><span class="num">01</span> El costo de la fragmentación</h2>
+
+        <p>La fragmentación tiene un costo emocional para quien la sufre, y un costo estratégico para quien la observa.</p>
+
+        <div class="frag-grid">
+          <div class="frag"><div class="frag-lbl">Para mí</div><div class="frag-val">Cada plataforma me pedía ser una versión distinta. Tono distinto. Audiencia distinta. <b>Mantener cinco "yos" cansa.</b></div></div>
+          <div class="frag"><div class="frag-lbl">Para quien busca</div><div class="frag-val">Inversionista, posible socio, organizador de evento — nadie quería juntar piezas. Si no contesto en una pieza, lo pierdo.</div></div>
+          <div class="frag"><div class="frag-lbl">Para el algoritmo</div><div class="frag-val">Cada plataforma me empujaba a su nicho. <b>Posts virales en una</b>, irrelevantes en otra. Sin compounding.</div></div>
+          <div class="frag"><div class="frag-lbl">Para mi marca</div><div class="frag-val">La through-line — "founder que construye con IA en MX, escribe, habla, y hace contenido" — <b>no existía en ningún lado</b>.</div></div>
+        </div>
+
+        <p>Y el costo más grande: <strong>no podía construir compounding</strong>. Cada plataforma era un cubo separado. Mis followers de Instagram no veían mis builds. Mis seguidores de GitHub no leían mis ensayos. Y yo no podía decir "ve mi log" porque no había un log.</p>
+
+        <h2><span class="num">02</span> La decisión: un solo log</h2>
+
+        <p>La hipótesis: si todo lo que hago — código, escritos, charlas, contenido — vive en un solo lugar con un solo tag de tipo (<code>build</code>, <code>write</code>, <code>talk</code>, <code>make</code>), entonces la <em>persona</em> emerge sin que yo la cure. La emerge la suma.</p>
+
+        <blockquote>No soy un developer que también escribe. No soy un creator que también construye. Soy el log de todo eso junto. La distinción entre roles es del observador, no mía.</blockquote>
+
+        <p>Es una decisión de identidad antes que de UX. Si mi sitio dice "aquí está mi código" y "aquí están mis escritos" en navegaciones separadas, estoy aceptando que esas son cosas diferentes. Y para mí no lo son. Son la misma persona haciendo cosas distintas el lunes y el jueves.</p>
+
+        <h2><span class="num">03</span> La estructura: kind tags &gt; pages separadas</h2>
+
+        <p>La arquitectura del sitio refleja la decisión:</p>
+
+        <ul>
+          <li>Una sola tabla — el log.</li>
+          <li>Cuatro tipos de entrada: <code>build</code>, <code>write</code>, <code>talk</code>, <code>make</code>.</li>
+          <li>Filtros para verlas separadas <em>cuando quieras</em>, pero el default es todo junto.</li>
+          <li>Cada entrada con su slug propio si lo amerita.</li>
+        </ul>
+
+        <p>El visitante que llega ve el log completo en orden cronológico. Lo más reciente es lo que estoy haciendo <em>ahora</em>. Si quiere solo charlas, filtra; si solo lectura, filtra. Pero el primer encuentro es la persona, no el cubo.</p>
+
+        <h2><span class="num">04</span> Tech choice: nada</h2>
+
+        <p>El sitio es un solo <code>index.html</code> estático en GitHub Pages. Cero build step. Cero framework. Cero CMS. Cero hosting que pagar.</p>
+
+        <p>Esto es a propósito. Cuando el sitio es la cosa más simple que puede funcionar, no hay excusa para no actualizarlo. Agregar una entrada es agregar un <code>&lt;tr&gt;</code>. Editar el bio es editar un párrafo. <code>git push</code> y queda live.</p>
+
+        <p>La inversión en arquitectura técnica baja muchas veces es la excusa para no escribir. Si tu blog requiere 4 horas de setup mental para publicar, no vas a publicar. <strong>Friction inversa: el sitio más simple gana porque lo actualizas más.</strong></p>
+
+        <h2><span class="num">05</span> El nombre: oa.log</h2>
+
+        <p>Tres letras + un punto + una extensión que técnicamente no existe como TLD pero que tipográficamente lee como <em>archivo de logs</em>. Es lo que es: el log de Osvaldo Ayala. No es marca personal envuelta en metáforas. Es la cosa.</p>
+
+        <p>El punto está en rojo. Es el mark. Cuando ves <code>oa</code><span style="color:var(--accent);">.</span><code>log</code> entiendes inmediatamente lo que es: dato técnico, archivo abierto, no curaduría editorial. Eso es honesto.</p>
+
+        <hr>
+
+        <p>Si todo esto suena demasiado teórico para algo tan simple como "una página personal", es porque la decisión es teórica. La página es solo el efecto.</p>
+
+        <p>El próximo founder que esté esparcido entre cinco plataformas — y son muchos — debería verlo y pensar: <em>"¿yo qué tan lejos estoy de tener mi propio log?"</em> Más cerca de lo que crees. Empieza por elegir el nombre.</p>
+      </div>
+
+      <footer class="post-footer">
+        <p>Publicado <b>10 abril 2026</b> · Próximo: la disciplina del minimalismo editorial</p>
+        <a href="/blog/" class="back-link"><span class="arr">←</span> Volver al blog</a>
+      </footer>
+    </article>
+  </main>
+
+  <script>
+    (function() {
+      const mode = document.getElementById('oaMode');
+      const stored = localStorage.getItem('oa-theme');
+      if (stored === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      mode.addEventListener('click', () => {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        if (isDark) { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('oa-theme', 'light'); }
+        else { document.documentElement.setAttribute('data-theme', 'dark'); localStorage.setItem('oa-theme', 'dark'); }
+      });
+    })();
+  </script>
+</body>
+</html>

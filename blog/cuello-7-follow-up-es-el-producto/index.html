@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F4F4F2">
+  <title>Cuello de botella #7: el follow-up es el producto · oa.log</title>
+  <meta name="description" content="En B2B, lo que vendes no es el producto. Lo que vendes es la cadencia con la que apareces. Cómo recuperar el 80% de leads que se mueren en el limbo.">
+  <link rel="canonical" href="https://overw0rked.github.io/blog/cuello-7-follow-up-es-el-producto/">
+  <meta property="og:title" content="Cuello de botella #7: el follow-up es el producto · oa.log">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="es_MX">
+  <meta property="article:published_time" content="2026-05-03">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23F4F4F2'/%3E%3Ctext x='8' y='12' font-family='Inter,sans-serif' font-size='10' font-weight='500' text-anchor='middle' fill='%23131313'%3Eoa%3C/text%3E%3Ccircle cx='13' cy='3' r='1.5' fill='%23FF202B'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { margin: 0; font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--paper); color: var(--ink-900); transition: background 280ms ease, color 280ms ease; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden; }
+    :root { --paper: #F4F4F2; --ink-900: #131313; --ink-700: #1A1A1A; --ink-500: #474747; --ink-300: #BCBCBC; --ink-100: #E5E3DD; --accent: #FF202B; --container-pad: 32px; --tr-fast: 160ms; --ease-out: cubic-bezier(0.2, 0.85, 0.2, 1); }
+    [data-theme="dark"] { --paper: #0E0E0E; --ink-900: #F4F4F2; --ink-700: #BCBCBC; --ink-500: #888888; --ink-300: #474747; --ink-100: #1A1A1A; }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 var(--container-pad); position: relative; }
+    @media (max-width: 1024px) { :root { --container-pad: 24px; } }
+    @media (max-width: 640px) { :root { --container-pad: 18px; } }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(to right, currentColor 1px, transparent 1px); background-size: 111px 100%; background-position: 50% 0; color: var(--ink-900); opacity: 0.02; pointer-events: none; z-index: 0; }
+    @media (max-width: 640px) { body::before { display: none; } }
+    main { position: relative; z-index: 1; }
+    h1, h2, h3 { color: var(--ink-900); }
+
+    .top { padding: 22px 0 14px; display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; font-size: 12px; color: var(--ink-500); }
+    .top-left { display: inline-flex; align-items: center; gap: 14px; }
+    .logo { width: 28px; height: 28px; border: 1.5px solid var(--ink-900); border-radius: 3px; display: inline-flex; align-items: center; justify-content: center; font-weight: 500; font-size: 12px; color: var(--ink-900); transition: transform 360ms var(--ease-out), border-color 240ms ease; cursor: pointer; user-select: none; text-decoration: none; flex-shrink: 0; }
+    .logo:hover { transform: rotate(-90deg); border-color: var(--accent); }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--ink-500); text-decoration: none; transition: color var(--tr-fast) ease; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; }
+    .back-link:hover { color: var(--accent); }
+    .back-link .arr { transition: transform 200ms ease; display: inline-block; }
+    .back-link:hover .arr { transform: translateX(-3px); }
+    .mode { width: 18px; height: 18px; border-radius: 50%; background: linear-gradient(90deg, var(--ink-900) 50%, var(--paper) 50%); border: 1px solid var(--ink-900); cursor: pointer; transition: transform 280ms var(--ease-out); padding: 0; flex-shrink: 0; }
+    .mode:hover { transform: rotate(180deg); }
+
+    article header { padding: clamp(28px, 5vw, 56px) 0 clamp(20px, 3vw, 36px); border-bottom: 1px solid var(--ink-300); margin-bottom: clamp(32px, 4.6vw, 48px); }
+    .post-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--ink-500); font-family: 'JetBrains Mono', monospace; margin-bottom: 24px; }
+    .post-tag .num { color: var(--accent); }
+    .post-h1 { font-size: clamp(36px, 6vw, 72px); line-height: 1.04; font-weight: 500; letter-spacing: -0.028em; color: var(--ink-900); margin: 0 0 22px; }
+    .post-h1 em { font-style: normal; color: var(--accent); }
+    .post-sub { font-size: clamp(16px, 2vw, 22px); line-height: 1.45; color: var(--ink-500); margin: 0 0 28px; font-weight: 400; }
+    .post-meta { display: flex; gap: 12px 18px; font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--ink-500); font-family: 'JetBrains Mono', monospace; flex-wrap: wrap; }
+    .post-meta b { color: var(--ink-900); font-weight: 500; }
+    .post-meta-sep { color: var(--ink-300); opacity: 0.7; }
+
+    .prose { font-size: clamp(16px, 1.8vw, 19px); line-height: 1.65; color: var(--ink-700); }
+    [data-theme="dark"] .prose { color: var(--ink-900); opacity: 0.92; }
+    .prose p { margin: 0 0 22px; }
+    .prose p.lede { font-size: 1.1em; line-height: 1.55; color: var(--ink-900); }
+    .prose h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.15; font-weight: 500; letter-spacing: -0.02em; color: var(--ink-900); margin: 48px 0 16px; }
+    .prose h2 .num { font-family: 'JetBrains Mono', monospace; font-size: 0.6em; color: var(--ink-300); margin-right: 12px; vertical-align: 0.05em; font-weight: 400; }
+    .prose h3 { font-size: clamp(18px, 2.2vw, 22px); line-height: 1.2; font-weight: 500; letter-spacing: -0.015em; color: var(--ink-900); margin: 32px 0 12px; }
+    .prose b, .prose strong { color: var(--ink-900); font-weight: 500; }
+    .prose em { color: var(--ink-900); font-style: italic; }
+    .prose ul, .prose ol { padding-left: 24px; margin: 0 0 22px; }
+    .prose li { margin-bottom: 8px; }
+    .prose blockquote { margin: 28px 0; padding: 18px 22px; border-left: 3px solid var(--accent); background: var(--ink-100); font-size: 1.05em; line-height: 1.5; color: var(--ink-900); font-style: italic; }
+    .prose code { background: var(--ink-100); padding: 2px 7px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.9em; color: var(--ink-900); }
+    .prose hr { border: none; border-top: 1px solid var(--ink-300); margin: 36px 0; }
+    .prose .callout { padding: 20px 24px; border: 1px solid var(--ink-300); border-left: 3px solid var(--accent); background: transparent; margin: 28px 0; }
+    .prose .callout-label { font-size: 10px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--accent); font-family: 'JetBrains Mono', monospace; margin-bottom: 6px; }
+    .prose .callout p { margin: 0; font-size: 0.95em; line-height: 1.5; color: var(--ink-900); font-style: normal; }
+    .prose .cadence-list { list-style: none; padding: 0; margin: 24px 0; border-top: 1px solid var(--ink-300); }
+    .prose .cadence-list li { display: grid; grid-template-columns: 80px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--ink-300); margin: 0; font-size: 0.95em; }
+    .prose .cadence-list .day { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); letter-spacing: 1px; padding-top: 2px; }
+
+    .post-footer { display: flex; justify-content: space-between; padding: 32px 0 24px; border-top: 1px solid var(--ink-900); margin-top: 48px; font-size: 11px; color: var(--ink-500); flex-wrap: wrap; gap: 16px; font-family: 'JetBrains Mono', monospace; }
+    .post-footer b { color: var(--ink-900); font-weight: 500; }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header class="top">
+      <div class="top-left">
+        <a href="/" class="logo">oa</a>
+        <a href="/blog/" class="back-link"><span class="arr">←</span> Blog</a>
+      </div>
+      <button class="mode" id="oaMode" aria-label="Toggle theme"></button>
+    </header>
+
+    <article>
+      <header>
+        <div class="post-tag"><span class="num">01</span> Ensayo · B2B</div>
+        <h1 class="post-h1">Cuello de botella #7: el <em>follow-up</em> es el producto.</h1>
+        <p class="post-sub">En B2B, lo que vendes no es el producto. Lo que vendes es la cadencia con la que apareces.</p>
+        <div class="post-meta">
+          <span><b>03 mayo 2026</b></span>
+          <span class="post-meta-sep">·</span>
+          <span>4 min de lectura</span>
+          <span class="post-meta-sep">·</span>
+          <span><b>Osvaldo Ayala</b></span>
+        </div>
+      </header>
+
+      <div class="prose">
+        <p class="lede">El 80% de los founders que conozco pierden la mayoría de sus deals B2B no en la demo, no en la objeción de precio, ni en la propuesta. Los pierden en el limbo entre <em>"te paso la cotización"</em> y <em>"déjame ver con mi equipo"</em>. Ahí mueren.</p>
+
+        <p>Mueren porque nadie sigue. Nadie vuelve. El correo se queda en una bandeja de entrada con 200 cosas más urgentes, y el cliente — que <em>sí</em> estaba interesado — se distrae, no contesta, asume que tú tampoco quieres tanto el deal.</p>
+
+        <p>La sorpresa de todos los que llevamos años haciendo B2B es esta: <strong>la gran mayoría de las ventas no se ganan por ser el mejor. Se ganan por ser el que sigue ahí cuando el otro ya se fue.</strong></p>
+
+        <h2><span class="num">01</span> El follow-up no es seguimiento. Es el producto.</h2>
+
+        <p>Si vendes un servicio, una herramienta SaaS, una implementación — lo que sea que cueste más de $500 USD y requiera más de una conversación — entonces el follow-up <em>es</em> lo que estás vendiendo.</p>
+
+        <p>El cliente está comprando dos cosas: la solución, y la sensación de que vas a estar ahí cuando algo salga mal. La segunda se demuestra <em>antes</em> de cerrar, no después. Y la única forma de demostrarla es siguiendo, en serio, con cadencia.</p>
+
+        <blockquote>El cliente no recuerda lo que prometiste en la primera junta. Recuerda si volviste a contactarlo cuando dijiste que ibas a volver.</blockquote>
+
+        <h2><span class="num">02</span> La cadencia que funciona: D1 · D3 · D7 · D14</h2>
+
+        <p>Después de cualquier interacción significativa con un lead — primera junta, demo, envío de cotización — la cadencia que mejor performance da en mi experiencia y la de varios founders B2B que conozco es ésta:</p>
+
+        <ul class="cadence-list">
+          <li><span class="day">DÍA 1</span><span>"Te paso el material que mencioné" — confirma lo discutido + envía cualquier cosa prometida. No vendas más. Resume.</span></li>
+          <li><span class="day">DÍA 3</span><span>"¿Pudiste revisar?" — checa si la propuesta llegó, si tienen preguntas. Sin presión. Demuestra que estás pendiente.</span></li>
+          <li><span class="day">DÍA 7</span><span>"Te dejo un caso parecido" — aporta valor adicional. Un cliente que hizo algo similar, un artículo relevante. No pidas decisión.</span></li>
+          <li><span class="day">DÍA 14</span><span>"¿Sigue siendo prioridad este Q?" — pregunta directa. Si no es momento, queda claro y archivas. Si sí, pides la siguiente acción concreta.</span></li>
+        </ul>
+
+        <p>Después del día 14, si no hay señal, archivas y pones recordatorio para 60 días. <strong>No es muerte. Es pausa.</strong></p>
+
+        <h2><span class="num">03</span> Empieza manual antes de automatizar</h2>
+
+        <p>El error técnico más común que veo en founders dev-heavy: automatizan el follow-up <em>antes</em> de entenderlo. Configuran HubSpot, escriben templates, prenden secuencias automáticas. Y se vuelven invisibles para el cliente porque cada mensaje suena a robot.</p>
+
+        <p>Hazlo manual los primeros 20-30 deals. Sin templates. Sin automation. Solo tú escribiendo, observando qué genera respuesta y qué no, qué tono funciona con qué tipo de cliente, en qué horarios.</p>
+
+        <div class="callout">
+          <div class="callout-label">Regla</div>
+          <p>Si no entiendes el proceso a mano, no lo automatices. La automatización amplifica lo que ya funciona — pero amplifica también lo que no.</p>
+        </div>
+
+        <h2><span class="num">04</span> El stack mínimo</h2>
+
+        <p>Lo que necesitas para empezar a no perder leads:</p>
+
+        <ul>
+          <li><strong>HubSpot Free</strong> o <strong>Folk</strong> — un lugar donde vivan tus contactos con notas y fechas.</li>
+          <li><strong>Calendar reminders</strong> — uno por cada follow-up programado. Aunque sea Apple Calendar.</li>
+          <li><strong>Una plantilla de cotización</strong> en Google Docs con link de pago integrado (Stripe).</li>
+          <li><strong>Cero CRM enterprise</strong> hasta que tengas <em>al menos</em> 50 deals activos.</li>
+        </ul>
+
+        <p>Eso es todo. La gente arma stacks de 7 herramientas integradas con Zapier antes de tener el primer cliente. No.</p>
+
+        <h2><span class="num">05</span> Era IA: el agente que sí da seguimiento</h2>
+
+        <p>El cambio que la IA introduce en B2B no es chatear con clientes — es <em>recordarte a ti</em> qué seguimientos tienes pendientes, con qué cliente, en qué tono. Y, cuando ya tienes 50+ deals, escribir el primer borrador del mensaje de seguimiento por ti.</p>
+
+        <p>Pero el primer borrador. Tú lo editas, tú lo mandas. El cliente sigue hablando contigo, no con un loop.</p>
+
+        <hr>
+
+        <p>Resumen para founders que quieran arrancar lunes:</p>
+
+        <ol>
+          <li>Lista los deals abiertos donde no contactaste en los últimos 14 días.</li>
+          <li>Por cada uno, escribe un mensaje de 3-5 líneas. Manual. Sin templates.</li>
+          <li>Pon recordatorio para volver a tocar base en 7 días si no contestan.</li>
+          <li>La próxima semana repite. Y la siguiente. Y la siguiente.</li>
+        </ol>
+
+        <p>Eso es todo. <strong>El follow-up no es una técnica de ventas. Es la disciplina mínima para no perder lo que ya ganaste.</strong></p>
+      </div>
+
+      <footer class="post-footer">
+        <p>Publicado <b>03 mayo 2026</b> · Próximo en la serie: cuello de botella #8 · WhatsApp</p>
+        <a href="/blog/" class="back-link"><span class="arr">←</span> Volver al blog</a>
+      </footer>
+    </article>
+  </main>
+
+  <script>
+    (function() {
+      const mode = document.getElementById('oaMode');
+      const stored = localStorage.getItem('oa-theme');
+      if (stored === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      mode.addEventListener('click', () => {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        if (isDark) { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('oa-theme', 'light'); }
+        else { document.documentElement.setAttribute('data-theme', 'dark'); localStorage.setItem('oa-theme', 'dark'); }
+      });
+    })();
+  </script>
+</body>
+</html>
