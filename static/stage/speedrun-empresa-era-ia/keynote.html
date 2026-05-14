@@ -75,6 +75,12 @@
     .about-content .role { font-size: clamp(10px, 1vw, 26px); color: var(--ink-500); margin: 0 0 14px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 1.2px; }
     .about-content .bio { font-size: clamp(12px, 1.3vw, 35px); line-height: 1.5; color: var(--ink-500); margin: 0; max-width: 52ch; }
     .about-content .bio b { color: var(--ink-900); font-weight: 500; }
+    .about-ventures { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(10px, 1.2vw, 24px); margin-top: clamp(12px, 1.6vw, 28px); padding-top: clamp(12px, 1.5vw, 26px); border-top: 0.5px solid var(--ink-300); }
+    .about-venture { display: grid; grid-template-columns: auto 1fr; gap: clamp(8px, 1vw, 16px); align-items: flex-start; }
+    .about-venture-logo { width: clamp(28px, 3vw, 64px); height: clamp(28px, 3vw, 64px); background: var(--ink-900); color: var(--paper); display: inline-flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: clamp(10px, 1.1vw, 22px); font-weight: 500; letter-spacing: 0.5px; border-radius: 2px; flex-shrink: 0; }
+    .about-venture-name { font-size: clamp(13px, 1.4vw, 30px); font-weight: 500; color: var(--ink-900); line-height: 1.15; margin: 0 0 clamp(2px, 0.3vw, 5px); }
+    .about-venture-desc { font-size: clamp(10px, 1.05vw, 20px); line-height: 1.4; color: var(--ink-500); margin: 0; }
+    .about-venture-tag { font-family: 'JetBrains Mono', monospace; font-size: clamp(8px, 0.85vw, 14px); letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink-300); margin: 0 0 clamp(2px, 0.3vw, 4px); }
     .about-socials { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(10px, 1.2vw, 35px); padding-top: clamp(8px, 1.2vw, 26px); border-top: 0.5px solid var(--ink-900); }
     .about-social .label { font-size: 9px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--ink-300); margin-bottom: 4px; font-family: 'JetBrains Mono', monospace; }
     .about-social .handle { font-size: clamp(11px, 1.2vw, 31px); font-weight: 500; color: var(--ink-900); }
@@ -704,6 +710,24 @@
           <h2 class="anim-up" style="--d:200ms">Osvaldo Ayala.</h2>
           <p class="role anim-up" style="--d:380ms">Product · Founder, Creators Crate · 35 · Monterrey → CDMX</p>
           <p class="bio anim-up" style="--d:520ms">Originario de <b>Monterrey, Nuevo León</b>. Construyo herramientas para emprendedores y creadores en México — todo <b>bootstrapeado</b>, sin ronda. Apilo identidades como <b>founder</b>, <b>product</b>, <b>speaker</b>, <b>creator</b> — todavía aprendiendo a hacer mejor cada una. Esta charla es para los que arrancan con flujo propio: no aplica igual si ya tienes inversionistas presionando crecimiento a costa de quemar.</p>
+          <div class="about-ventures anim-up-sm" style="--d:620ms">
+            <div class="about-venture">
+              <span class="about-venture-logo">CC</span>
+              <div>
+                <div class="about-venture-tag">Estudio · 2024</div>
+                <div class="about-venture-name">Creators Crate</div>
+                <p class="about-venture-desc">Estudio que construye herramientas y agentes IA para emprendedores y creadores en México.</p>
+              </div>
+            </div>
+            <div class="about-venture">
+              <span class="about-venture-logo">Cr</span>
+              <div>
+                <div class="about-venture-tag">Producto · CC</div>
+                <div class="about-venture-name">Creeeam</div>
+                <p class="about-venture-desc">Plataforma para coordinar y verificar campañas con creadores de contenido en México.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="about-socials">
