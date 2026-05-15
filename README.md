@@ -9,7 +9,7 @@
 
 ## What this is
 
-`oa.log` is my unified personal site. The philosophy: one chronological feed where each entry carries a `kind` tag (`build` · `write` · `talk` · `make`), instead of separate `/blog`, `/portfolio`, `/talks` pages. For the full manifesto see [`/blog/por-que-oalog-existe/`](https://overw0rked.github.io/blog/por-que-oalog-existe/).
+`oa.log` is my unified personal site. The philosophy: one chronological feed where each entry carries a `kind` tag (`build` · `write` · `talk` · `make`), instead of separate `/blog`, `/portfolio`, `/talks` pages.
 
 ## Stack
 

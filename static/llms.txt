@@ -25,8 +25,6 @@ updated:  2026-05-15
 ## Ensayos
 
 - [Cuello de botella #7: el follow-up es el producto](https://overw0rked.github.io/blog/cuello-7-follow-up-es-el-producto/): En B2B no vendes el producto — vendes la cadencia con la que apareces. Por qué D1·D3·D7·D14 gana más deals que la mejor demo.
-- [Por qué oa.log existe](https://overw0rked.github.io/blog/por-que-oalog-existe/): Manifiesto. Por qué consolidar identidad digital en un solo lugar en vez de esparcirla en 5 plataformas que no se hablan.
-- [Disciplina del minimalismo editorial](https://overw0rked.github.io/blog/disciplina-minimalismo-editorial/): Notas de diseño sobre el sistema visual de oa.log. La restricción como feature. Referencia: editorial polaco, tipografía variable, blanco como dato.
 
 ## Contacto y colaboración
 
