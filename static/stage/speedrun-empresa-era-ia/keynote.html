@@ -290,31 +290,35 @@
     .cc-team-cities .ctag { font-family: 'JetBrains Mono', monospace; font-size: clamp(8px, 0.85vw, 12px); letter-spacing: 1.2px; color: var(--paper); background: var(--ink-900); padding: 2px 6px; border-radius: 2px; flex-shrink: 0; }
     .cc-team-cities .ctag.red { background: var(--accent); }
     .cc-team-globe-wrap { display: flex; align-items: center; justify-content: center; height: 100%; position: relative; }
-    .cc-globe-svg { width: clamp(220px, 36vmin, 600px); height: clamp(220px, 36vmin, 600px); display: block; }
-    .cc-globe-svg .sphere-outline { fill: none; stroke: var(--ink-900); stroke-width: 1.2; }
-    .cc-globe-svg .lat-line { fill: none; stroke: var(--ink-300); stroke-width: 0.5; stroke-dasharray: 2 2; }
-    .cc-globe-svg .lng-spin { transform-origin: 200px 200px; animation: lng-spin 14s linear infinite; }
-    .cc-globe-svg .lng-line { fill: none; stroke: var(--ink-300); stroke-width: 0.5; stroke-dasharray: 2 3; }
-    @keyframes lng-spin {
-      from { transform: scaleX(1); }
-      25%  { transform: scaleX(0); }
-      50%  { transform: scaleX(-1); }
-      75%  { transform: scaleX(0); }
-      to   { transform: scaleX(1); }
+    .cc-globe-svg { width: clamp(220px, 38vmin, 640px); height: clamp(220px, 38vmin, 640px); display: block; }
+    .cc-globe-svg .sphere-outline { fill: none; stroke: var(--ink-900); stroke-width: 1.4; }
+    .cc-globe-svg .lat-line { fill: none; stroke: var(--ink-300); stroke-width: 0.6; }
+    .cc-globe-svg .lng-line { fill: none; stroke: var(--ink-300); stroke-width: 0.6; transform-origin: 200px 200px; animation: lng-flip 16s linear infinite; }
+    .cc-globe-svg .lng-line.l1 { animation-delay: 0s; }
+    .cc-globe-svg .lng-line.l2 { animation-delay: -3.2s; }
+    .cc-globe-svg .lng-line.l3 { animation-delay: -6.4s; }
+    .cc-globe-svg .lng-line.l4 { animation-delay: -9.6s; }
+    .cc-globe-svg .lng-line.l5 { animation-delay: -12.8s; }
+    @keyframes lng-flip {
+      0%   { transform: scaleX(1); opacity: 0.85; }
+      25%  { transform: scaleX(0.02); opacity: 0.35; }
+      50%  { transform: scaleX(-1); opacity: 0.85; }
+      75%  { transform: scaleX(0.02); opacity: 0.35; }
+      100% { transform: scaleX(1); opacity: 0.85; }
     }
-    .cc-globe-svg .continent { fill: var(--ink-900); opacity: 0.92; }
-    .cc-globe-svg .grid-bg circle { fill: var(--ink-300); }
-    .cc-globe-svg .city { fill: var(--accent); animation: city-pulse 2.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .cc-globe-svg .equator { fill: none; stroke: var(--accent); stroke-width: 1; stroke-dasharray: 3 4; opacity: 0.5; }
+    .cc-globe-svg .meridian-prime { fill: none; stroke: var(--ink-500); stroke-width: 0.7; }
+    .cc-globe-svg .city { fill: var(--accent); transform-box: fill-box; transform-origin: center; animation: city-pulse 2.2s ease-in-out infinite; }
     .cc-globe-svg .city.delay-1 { animation-delay: 0.25s; }
     .cc-globe-svg .city.delay-2 { animation-delay: 0.5s; }
     .cc-globe-svg .city.delay-3 { animation-delay: 0.75s; }
     .cc-globe-svg .city.delay-4 { animation-delay: 1s; }
     .cc-globe-svg .city.delay-5 { animation-delay: 1.25s; }
-    @keyframes city-pulse {
-      0%, 100% { opacity: 0.55; transform: scale(1); }
-      50%      { opacity: 1; transform: scale(1.4); }
-    }
-    .cc-globe-svg .equator { fill: none; stroke: var(--accent); stroke-width: 0.7; stroke-dasharray: 1 4; opacity: 0.4; }
+    .cc-globe-svg .city-ring { fill: none; stroke: var(--accent); stroke-width: 0.6; opacity: 0.5; transform-box: fill-box; transform-origin: center; animation: city-ring-pulse 2.2s ease-out infinite; }
+    @keyframes city-pulse { 0%, 100% { opacity: 0.8; transform: scale(1); } 50% { opacity: 1; transform: scale(1.25); } }
+    @keyframes city-ring-pulse { 0% { opacity: 0.6; transform: scale(1); } 100% { opacity: 0; transform: scale(2.6); } }
+    .cc-globe-svg .label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; fill: var(--ink-500); }
+    .cc-globe-svg .label-red { fill: var(--accent); font-weight: 500; }
     .cc-team-foot { display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: clamp(9px, 1vw, 14px); letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink-500); padding-top: clamp(8px, 1vw, 14px); border-top: 0.5px solid var(--ink-900); }
     .cc-team-foot b { color: var(--ink-900); }
 
@@ -843,46 +847,48 @@
         </div>
         <div class="cc-team-globe-wrap anim-scale" style="--d:340ms">
           <svg class="cc-globe-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-label="Globo terráqueo con equipo distribuido">
-            <!-- subtle background dot grid (gives texture) -->
-            <g class="grid-bg" clip-path="circle(165px at 200 200)">
-              <circle cx="200" cy="200" r="170" fill="none" stroke="var(--ink-100)" stroke-width="1"/>
-            </g>
             <!-- sphere outline -->
             <circle class="sphere-outline" cx="200" cy="200" r="168"/>
             <!-- latitude lines (fixed, suggest curvature) -->
-            <g>
-              <ellipse class="lat-line" cx="200" cy="200" rx="168" ry="42"/>
-              <ellipse class="lat-line" cx="200" cy="200" rx="168" ry="100"/>
-              <ellipse class="lat-line" cx="200" cy="200" rx="168" ry="148"/>
-            </g>
-            <!-- equator (subtle red) -->
+            <ellipse class="lat-line" cx="200" cy="200" rx="168" ry="42"/>
+            <ellipse class="lat-line" cx="200" cy="200" rx="168" ry="100"/>
+            <ellipse class="lat-line" cx="200" cy="200" rx="168" ry="148"/>
+            <!-- equator -->
             <line class="equator" x1="32" y1="200" x2="368" y2="200"/>
-            <!-- longitude lines (rotating to suggest 3D spin) -->
-            <g class="lng-spin">
-              <ellipse class="lng-line" cx="200" cy="200" rx="84" ry="168"/>
-              <ellipse class="lng-line" cx="200" cy="200" rx="140" ry="168"/>
-              <ellipse class="lng-line" cx="200" cy="200" rx="42" ry="168"/>
-            </g>
-            <!-- Americas silhouettes (Mexico + Central America + South America) -->
-            <g clip-path="circle(165px at 200 200)">
-              <path class="continent" d="M148,108 Q145,128 152,148 Q158,160 160,170 L168,180 L178,190 Q180,200 175,212 L190,222 L195,238 Q198,252 200,266 L195,290 Q192,308 188,322 L180,342 Q175,354 178,360 L182,348 Q186,332 192,318 L198,296 Q204,276 208,260 Q212,244 210,228 Q205,214 200,200 L196,184 L188,176 L180,166 L172,154 Q166,140 162,124 Q160,116 154,110 Z"/>
-              <!-- small Yucatán bump -->
-              <path class="continent" d="M186,178 L195,180 L198,186 L192,188 Z"/>
-            </g>
-            <!-- city dots (Mexico cluster + Patagonia) — DO NOT rotate, they "live" on front face -->
+            <!-- prime meridian (fixed front) -->
+            <ellipse class="meridian-prime" cx="200" cy="200" rx="2" ry="168"/>
+            <!-- rotating longitude lines (5 staggered to fake 3D rotation) -->
+            <ellipse class="lng-line l1" cx="200" cy="200" rx="120" ry="168"/>
+            <ellipse class="lng-line l2" cx="200" cy="200" rx="84" ry="168"/>
+            <ellipse class="lng-line l3" cx="200" cy="200" rx="42" ry="168"/>
+            <ellipse class="lng-line l4" cx="200" cy="200" rx="140" ry="168"/>
+            <ellipse class="lng-line l5" cx="200" cy="200" rx="60" ry="168"/>
+
+            <!-- City cluster: México (5 dots in upper-center) -->
             <g>
-              <!-- Monterrey -->
-              <circle class="city" cx="156" cy="138" r="6"/>
+              <text class="label" x="125" y="92">MX · CLUSTER</text>
+              <!-- Monterrey (top of cluster) -->
+              <circle class="city-ring" cx="178" cy="130" r="8"/>
+              <circle class="city" cx="178" cy="130" r="5"/>
               <!-- San Luis Potosí -->
-              <circle class="city delay-1" cx="164" cy="158" r="5"/>
+              <circle class="city-ring" cx="186" cy="148" r="7"/>
+              <circle class="city delay-1" cx="186" cy="148" r="5"/>
               <!-- CDMX -->
-              <circle class="city delay-2" cx="172" cy="178" r="6"/>
+              <circle class="city-ring" cx="190" cy="168" r="8"/>
+              <circle class="city delay-2" cx="190" cy="168" r="6"/>
               <!-- Puebla (right next to CDMX) -->
-              <circle class="city delay-3" cx="180" cy="182" r="4"/>
-              <!-- Colima (west coast, slightly left) -->
-              <circle class="city delay-4" cx="158" cy="180" r="5"/>
-              <!-- Patagonia (bottom) -->
-              <circle class="city delay-5" cx="186" cy="340" r="7"/>
+              <circle class="city-ring" cx="200" cy="172" r="6"/>
+              <circle class="city delay-3" cx="200" cy="172" r="4"/>
+              <!-- Colima (west) -->
+              <circle class="city-ring" cx="172" cy="160" r="6"/>
+              <circle class="city delay-4" cx="172" cy="160" r="4"/>
+            </g>
+
+            <!-- Patagonia (lower south, far below equator) -->
+            <g>
+              <text class="label label-red" x="170" y="350">AR · PATAGONIA</text>
+              <circle class="city-ring" cx="200" cy="318" r="10"/>
+              <circle class="city delay-5" cx="200" cy="318" r="6"/>
             </g>
           </svg>
         </div>
