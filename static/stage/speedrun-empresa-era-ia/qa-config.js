@@ -9,7 +9,7 @@ window.QA_CONFIG = {
   TALK_SLUG:    'speedrun-empresa-era-ia',
   TALK_TITLE:   'Speedrun · Empresa en la era de IA',
   TALK_EVENT:   'Playas on Tech · 14·05·2026',
-  TOTAL_SLIDES: 39,
+  TOTAL_SLIDES: 40,
 
   // Public audience URL (what the QR encodes and what gets read aloud)
   QA_URL: 'https://overw0rked.github.io/stage/speedrun-empresa-era-ia/qa.html'
